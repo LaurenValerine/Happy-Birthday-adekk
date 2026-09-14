@@ -74,14 +74,10 @@ body {
 #continue-section,
 #message-section,
 #path-section {
-    position: absolute;
-    inset: 0;
-
     width: 100%;
     height: 100vh;
     min-height: 100vh;
 }
-
 
 /* =========================
    FIREWORK
