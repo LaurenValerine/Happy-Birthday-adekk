@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Experience</title>
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    background: #050505;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+button {
+    font-family: inherit;
+}
+
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+.screen {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 1;
+    visibility: visible;
+
+    transition:
+        opacity 0.6s ease,
+        visibility 0.6s ease;
+}
+
+.screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+#loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #050505;
+
+    transition:
+        opacity 0.8s ease,
+        visibility 0.8s ease;
+}
+
+#loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loading-text {
+    font-size: 13px;
+    letter-spacing: 6px;
+
+    animation: loadingPulse 1.2s infinite ease-in-out;
+}
+
+@keyframes loadingPulse {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+
+/* =====================================================
+   OPENING
+===================================================== */
+
+#opening-screen {
+    background:
+        radial-gradient(
+            circle at center,
+            #151515 0%,
+            #050505 65%
+        );
+}
+
+
+/* =====================================================
+   FIREWORKS
+===================================================== */
+
+#fireworks {
+    position: absolute;
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+}
+
+.firework {
+    position: absolute;
+
+    font-size: 25px;
+
+    color: white;
+
+    opacity: 0;
+
+    animation:
+        fireworkAppear 0.8s ease-out forwards;
+}
+
+@keyframes fireworkAppear {
+
+    0% {
+        opacity: 0;
+        transform: scale(0.2);
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(2);
+    }
+}
+
+
+/* =====================================================
+   OPENING TITLE
+===================================================== */
+
+.opening-title {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+
+    padding: 30px;
+
+    text-align: center;
+}
+
+.opening-title h1 {
+    font-size: clamp(
+        28px,
+        7vw,
+        60px
+    );
+
+    font-weight: 700;
+
+    opacity: 0;
+
+    transform: translateY(20px);
+
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
+}
+
+.opening-title h1.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* =====================================================
+   DIALOG
+===================================================== */
+
+.dialog {
+    width: min(
+        90%,
+        550px
+    );
+
+    padding: 32px;
+
+    border: 1px solid rgba(
+        255,
+        255,
+        255,
+        0.18
+    );
+
+    border-radius: 22px;
+
+    background: rgba(
+        255,
+        255,
+        255,
+        0.05
+    );
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 60px
+        rgba(0, 0, 0, 0.4);
+}
+
+.dialog p {
+    font-size: clamp(
+        20px,
+        5vw,
+        30px
+    );
+
+    line-height: 1.6;
+
+    margin-bottom: 28px;
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.buttons {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 15px;
+
+    min-height: 55px;
+}
+
+.buttons button {
+    min-width: 105px;
+
+    padding: 13px 25px;
+
+    border: none;
+    border-radius: 999px;
+
+    background: #fff;
+    color: #050505;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        opacity 0.25s ease;
+}
+
+.buttons button:hover {
+    transform: scale(1.08);
+}
+
+
+/* =====================================================
+   TYPING
+===================================================== */
+
+#message-screen .dialog {
+    max-height: 75vh;
+
+    overflow-y: auto;
+}
+
+#typing-text {
+    min-height: 180px;
+
+    margin: 0;
+
+    text-align: left;
+
+    font-size: 16px !important;
+
+    line-height: 1.8;
+}
+
+
+/* =====================================================
+   PATH
+===================================================== */
+
+#path-screen {
+    flex-direction: column;
+
+    padding: 25px;
+
+    text-align: center;
+}
+
+#path-screen h2 {
+    margin-bottom: 10px;
+
+    font-size: clamp(
+        30px,
+        8vw,
+        50px
+    );
+}
+
+#path-screen > p {
+    margin-bottom: 35px;
+
+    font-size: 12px;
+
+    letter-spacing: 4px;
+
+    opacity: 0.7;
+}
+
+
+/* =====================================================
+   PATH BUTTONS
+===================================================== */
+
+.path-buttons {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 20px;
+
+    width: 100%;
+}
+
+.path-button {
+    width: min(
+        40vw,
+        180px
+    );
+
+    height: min(
+        40vw,
+        180px
+    );
+
+    border: 1px solid rgba(
+        255,
+        255,
+        255,
+        0.2
+    );
+
+    border-radius: 28px;
+
+    background: rgba(
+        255,
+        255,
+        255,
+        0.06
+    );
+
+    color: white;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.35s ease,
+        background 0.35s ease;
+}
+
+.path-button:hover {
+    transform: translateY(-10px);
+
+    background: rgba(
+        255,
+        255,
+        255,
+        0.12
+    );
+}
+
+.path-icon {
+    display: block;
+
+    margin-bottom: 12px;
+
+    font-size: 45px;
+}
+
+.path-name {
+    display: block;
+
+    font-size: 14px;
+
+    letter-spacing: 2px;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .dialog {
+        padding: 25px 20px;
+    }
+
+    #typing-text {
+        font-size: 14px !important;
+        line-height: 1.7;
+    }
+
+    .path-buttons {
+        gap: 12px;
+    }
+
+    .path-button {
+        width: 140px;
+        height: 140px;
+    }
+
+    .path-icon {
+        font-size: 35px;
+    }
+
+}
+
+
+/* =====================================================
+   FROG THEME
+===================================================== */
+
+body.frog-theme {
+    background: #030603;
+}
+
+
+/* =====================================================
+   J-HOPE THEME
+===================================================== */
+
+body.jhope-theme {
+    background: #080604;
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     LOADING
+===================================================== -->
+
+<div id="loading-screen">
+
+    <div class="loading-text">
+        LOADING...
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     OPENING
+===================================================== -->
+
+<section
+    id="opening-screen"
+    class="screen"
+>
+
+    <div id="fireworks"></div>
+
+    <div class="opening-title">
+
+        <h1 id="opening-title-text">
+            Ohhh ini yang lagi ultahh
+        </h1>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CONTINUE
+===================================================== -->
+
+<section
+    id="continue-screen"
+    class="screen hidden"
+>
+
+    <div class="dialog">
+
+        <p>
+            mau lanjut gaa?
+        </p>
+
+        <div class="buttons">
+
+            <button id="yes-button">
+                YA
+            </button>
+
+            <button id="no-button">
+                TIDAK
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MESSAGE
+===================================================== -->
+
+<section
+    id="message-screen"
+    class="screen hidden"
+>
+
+    <div class="dialog">
+
+        <p id="typing-text"></p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PATH
+===================================================== -->
+
+<section
+    id="path-screen"
+    class="screen hidden"
+>
+
+    <h2>
+        Pilih salah satu
+    </h2>
+
+    <p>
+        TIDAK BISA DUA.
+    </p>
+
+    <div class="path-buttons">
+
+        <button
+            class="path-button"
+            id="frog-button"
+        >
+
+            <span class="path-icon">
+                🐸
+            </span>
+
+            <span class="path-name">
+                KATAK
+            </span>
+
+        </button>
+
+
+        <button
+            class="path-button"
+            id="jhope-button"
+        >
+
+            <span class="path-icon">
+                ★
+            </span>
+
+            <span class="path-name">
+                J-HOPE
+            </span>
+
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<script>
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const loadingScreen =
+    document.getElementById(
+        "loading-screen"
+    );
+
+const openingScreen =
+    document.getElementById(
+        "opening-screen"
+    );
+
+const openingTitle =
+    document.getElementById(
+        "opening-title-text"
+    );
+
+const fireworks =
+    document.getElementById(
+        "fireworks"
+    );
+
+const continueScreen =
+    document.getElementById(
+        "continue-screen"
+    );
+
+const messageScreen =
+    document.getElementById(
+        "message-screen"
+    );
+
+const pathScreen =
+    document.getElementById(
+        "path-screen"
+    );
+
+const yesButton =
+    document.getElementById(
+        "yes-button"
+    );
+
+const noButton =
+    document.getElementById(
+        "no-button"
+    );
+
+const typingText =
+    document.getElementById(
+        "typing-text"
+    );
+
+const frogButton =
+    document.getElementById(
+        "frog-button"
+    );
+
+const jhopeButton =
+    document.getElementById(
+        "jhope-button"
+    );
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+const birthdayMessage =
+"Wahai ratu katak yang amat sungguh mulia istri dari sang raja katak J-Hope sekaligus Adek dari calon...calon apa nyakkk?calon pendamping? Calon masa depan? Bomat ahhh masih mumet ama dia mahhhh intinya mohon pilih SALAH SATU dibawah ini dan TIDAK BISA DUA untuk melanjutkan";
+
+
+/* =====================================================
+   WAIT
+===================================================== */
+
+function wait(ms) {
+
+    return new Promise(
+        resolve => setTimeout(
+            resolve,
+            ms
+        )
+    );
+
+}
+
+
+/* =====================================================
+   SHOW SCREEN
+===================================================== */
+
+function showScreen(screen) {
+
+    document
+        .querySelectorAll(".screen")
+        .forEach(element => {
+
+            element.classList.add(
+                "hidden"
+            );
+
+        });
+
+    screen.classList.remove(
+        "hidden"
+    );
+
+}
+
+
+/* =====================================================
+   FIREWORK
+===================================================== */
+
+function createFirework() {
+
+    const firework =
+        document.createElement(
+            "div"
+        );
+
+    firework.className =
+        "firework";
+
+    firework.textContent =
+        "✦";
+
+    firework.style.left =
+        Math.random() * 100 + "%";
+
+    firework.style.top =
+        Math.random() * 70 + "%";
+
+    firework.style.fontSize =
+        Math.floor(
+            Math.random() * 30 + 20
+        ) + "px";
+
+    fireworks.appendChild(
+        firework
+    );
+
+
+    setTimeout(() => {
+
+        firework.remove();
+
+    }, 900);
+
+}
+
+
+/* =====================================================
+   FIREWORK SHOW
+===================================================== */
+
+async function fireworkShow() {
+
+    for (
+        let i = 0;
+        i < 18;
+        i++
+    ) {
+
+        createFirework();
+
+        await wait(150);
+
+    }
+
+}
+
+
+/* =====================================================
+   TYPING
+===================================================== */
+
+async function typeText(
+    text,
+    speed = 28
+) {
+
+    typingText.textContent = "";
+
+    for (
+        let i = 0;
+        i < text.length;
+        i++
+    ) {
+
+        typingText.textContent +=
+            text[i];
+
+        await wait(speed);
+
+    }
+
+}
+
+
+/* =====================================================
+   MAIN OPENING
+===================================================== */
+
+async function startOpening() {
+
+    /*
+       LOADING
+    */
+
+    await wait(1800);
+
+
+    /*
+       HIDE LOADING
+    */
+
+    loadingScreen.classList.add(
+        "hidden"
+    );
+
+
+    /*
+       FIREWORK
+    */
+
+    showScreen(
+        openingScreen
+    );
+
+    await fireworkShow();
+
+
+    /*
+       TITLE
+    */
+
+    await wait(400);
+
+    openingTitle.classList.add(
+        "show"
+    );
+
+
+    /*
+       READ TITLE
+    */
+
+    await wait(1800);
+
+
+    /*
+       CONTINUE
+    */
+
+    showScreen(
+        continueScreen
+    );
+
+}
+
+
+/* =====================================================
+   YES
+===================================================== */
+
+yesButton.addEventListener(
+    "click",
+    async () => {
+
+        showScreen(
+            messageScreen
+        );
+
+        await wait(400);
+
+        await typeText(
+            birthdayMessage
+        );
+
+        await wait(800);
+
+        showScreen(
+            pathScreen
+        );
+
+    }
+);
+
+
+/* =====================================================
+   NO
+===================================================== */
+
+noButton.addEventListener(
+    "click",
+    () => {
+
+        swapButtons();
+
+    }
+);
+
+
+function swapButtons() {
+
+    const parent =
+        yesButton.parentElement;
+
+
+    if (
+        yesButton.nextElementSibling ===
+        noButton
+    ) {
+
+        parent.insertBefore(
+            noButton,
+            yesButton
+        );
+
+    } else {
+
+        parent.insertBefore(
+            yesButton,
+            noButton
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   NO BUTTON ESCAPE
+===================================================== */
+
+noButton.addEventListener(
+    "mouseenter",
+    () => {
+
+        if (
+            window.innerWidth <= 600
+        ) {
+            return;
+        }
+
+
+        const maxX =
+            window.innerWidth -
+            noButton.offsetWidth -
+            20;
+
+        const maxY =
+            window.innerHeight -
+            noButton.offsetHeight -
+            20;
+
+
+        noButton.style.position =
+            "fixed";
+
+        noButton.style.left =
+            Math.max(
+                10,
+                Math.random() * maxX
+            ) + "px";
+
+        noButton.style.top =
+            Math.max(
+                10,
+                Math.random() * maxY
+            ) + "px";
+
+    }
+);
+
+
+/* =====================================================
+   PATH
+===================================================== */
+
+frogButton.addEventListener(
+    "click",
+    () => {
+
+        /*
+           Untuk tahap selanjutnya:
+           masuk ke Frog Experience.
+        */
+
+        alert(
+            "KATAK EXPERIENCE"
+        );
+
+    }
+);
+
+
+jhopeButton.addEventListener(
+    "click",
+    () => {
+
+        /*
+           Untuk tahap selanjutnya:
+           masuk ke J-Hope Experience.
+        */
+
+        alert(
+            "J-HOPE EXPERIENCE"
+        );
+
+    }
+);
+
+
+/* =====================================================
+   START
+===================================================== */
+
+startOpening();
+
+</script>
+
+</body>
+</html>
