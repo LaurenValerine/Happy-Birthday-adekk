@@ -11,7 +11,7 @@
 html,
 body {
     width: 100%;
-    min-height: 100%;
+    height: 100%;
 }
 
 body {
@@ -21,18 +21,21 @@ body {
     overflow: hidden;
 }
 
-
-/* =========================
-   GLOBAL
-========================= */
-
 .hidden {
     display: none !important;
 }
 
-section {
+
+/* =========================
+   OPENING CONTAINER
+========================= */
+
+#opening {
+    position: relative;
     width: 100%;
+    height: 100vh;
     min-height: 100vh;
+    overflow: hidden;
 }
 
 
@@ -41,9 +44,14 @@ section {
 ========================= */
 
 #loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     background: #050505;
 }
 
@@ -59,25 +67,33 @@ section {
 
 
 /* =========================
-   OPENING
+   SEMUA SCREEN OPENING
 ========================= */
 
-#opening {
-    position: relative;
-    background: #050505;
+#firework-section,
+#continue-section,
+#message-section,
+#path-section {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
 }
 
 
 /* =========================
-   FIREWORK SECTION
+   FIREWORK
 ========================= */
 
 #firework-section {
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+
     overflow: hidden;
+    background: #050505;
 }
 
 #fireworks {
@@ -89,14 +105,18 @@ section {
 .opening-text {
     position: relative;
     z-index: 2;
-    text-align: center;
+
+    width: 100%;
     padding: 30px;
+
+    text-align: center;
 }
 
 .opening-text h1 {
     font-size: clamp(28px, 7vw, 60px);
     font-weight: 700;
     letter-spacing: -1px;
+
     opacity: 0;
 }
 
@@ -110,52 +130,69 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
+
     padding: 25px;
 }
 
 .dialog-box {
-    width: min(90%, 500px);
+    width: min(90%, 550px);
+
     padding: 30px;
+
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 20px;
+
     background: rgba(255, 255, 255, 0.05);
+
     backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
     text-align: center;
+
     box-shadow:
         0 0 30px rgba(255, 255, 255, 0.04);
 }
 
 .dialog-box > p:first-child {
     margin-bottom: 25px;
+
     font-size: clamp(20px, 5vw, 30px);
 }
 
 
 /* =========================
-   BUTTONS
+   YA / TIDAK
 ========================= */
 
 .choice-buttons {
     display: flex;
-    justify-content: center;
-    gap: 15px;
-}
 
-.choice-buttons button,
-.path-buttons button {
-    border: none;
-    cursor: pointer;
-    color: #ffffff;
-    font-weight: 700;
-    transition: 0.3s ease;
+    justify-content: center;
+    align-items: center;
+
+    gap: 15px;
+
+    min-height: 55px;
 }
 
 .choice-buttons button {
     min-width: 100px;
+
     padding: 13px 25px;
+
+    border: none;
     border-radius: 999px;
+
     background: #ffffff;
     color: #050505;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.3s ease,
+        opacity 0.3s ease;
 }
 
 .choice-buttons button:hover {
@@ -164,46 +201,63 @@ section {
 
 
 /* =========================
-   TYPING TEXT
+   TYPING
 ========================= */
 
 #typing-text {
+    min-height: 180px;
+
     text-align: left;
+
     line-height: 1.8;
     font-size: 16px;
-    min-height: 180px;
 }
 
 
 /* =========================
-   PATH SELECTION
+   PATH
 ========================= */
 
 #path-section {
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
     justify-content: center;
+
     padding: 25px;
+
     text-align: center;
 }
 
 #path-section h2 {
-    font-size: clamp(28px, 7vw, 45px);
     margin-bottom: 10px;
+
+    font-size: clamp(28px, 7vw, 45px);
 }
 
 #path-section > p {
     margin-bottom: 35px;
-    letter-spacing: 3px;
+
     font-size: 12px;
+
+    letter-spacing: 3px;
 }
 
 
+/* =========================
+   PATH BUTTONS
+========================= */
+
 .path-buttons {
     display: flex;
+
     justify-content: center;
+    align-items: center;
+
     gap: 20px;
+
     width: 100%;
 }
 
@@ -211,18 +265,31 @@ section {
     width: min(40vw, 180px);
     height: min(40vw, 180px);
     max-height: 180px;
-    border-radius: 25px;
-    background: rgba(255, 255, 255, 0.07);
+
     border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+
+    background: rgba(255, 255, 255, 0.07);
+    color: #ffffff;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease;
 }
 
 .path-buttons button:hover {
     transform: translateY(-8px);
+
     background: rgba(255, 255, 255, 0.12);
 }
 
 .path-buttons span {
     display: block;
+
     margin-top: 10px;
 }
 
