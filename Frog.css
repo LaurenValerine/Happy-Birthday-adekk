@@ -1,0 +1,262 @@
+:root {
+    --hijau: #2ecc71;
+    --hijau-gelap: #27ae60;
+    --hitam: #030603;
+    --abu: #121a12;
+    --putih: #f8f8f8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: var(--hitam);
+    color: var(--putih);
+    min-height: 100vh;
+}
+
+.screen {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease;
+}
+
+.screen.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.screen.hidden {
+    display: none !important;
+}
+
+.box {
+    width: min(90%, 550px);
+    background: var(--abu);
+    padding: 2.5rem;
+    border-radius: 20px;
+    border: 2px solid var(--hijau);
+    text-align: center;
+}
+
+.box.penuh {
+    width: min(95%, 700px);
+    min-height: 400px;
+}
+
+.box.tengah {
+    text-align: center;
+}
+
+h2 {
+    color: var(--hijau);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.soal {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+input {
+    width: 100%;
+    padding: 0.9rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    border: none;
+    background: #1f2f1f;
+    color: white;
+    font-size: 1rem;
+}
+
+button {
+    background: var(--hijau);
+    color: white;
+    border: none;
+    padding: 0.9rem 2rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+button:hover {
+    background: var(--hijau-gelap);
+    transform: scale(1.05);
+}
+
+.salah {
+    color: #ff6b6b;
+    margin-top: 0.5rem;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.angka-besar {
+    font-size: 5rem;
+    font-weight: bold;
+    color: var(--hijau);
+    margin: 2rem 0;
+}
+
+/* Gambar Kue & Kado */
+.gambar-kue, .gambar-kado {
+    max-width: 280px;
+    width: 80%;
+    margin: 1.5rem auto;
+    display: block;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+.gambar-kue:hover, .gambar-kado:hover {
+    transform: scale(1.05);
+}
+
+.petunjuk {
+    color: #88aa88;
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+/* Hujan Teks */
+#wadah-hujan {
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+    margin: 1rem 0;
+}
+
+.teks-jatuh {
+    position: absolute;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--hijau);
+    animation: jatuh 3s linear forwards;
+}
+
+@keyframes jatuh {
+    from { transform: translateY(-50px); opacity: 1; }
+    to { transform: translateY(300px); opacity: 0; }
+}
+
+#bentuk-hati {
+    font-size: 2rem;
+    color: var(--hijau);
+    margin: 1rem 0;
+}
+
+/* Error */
+.kotak-error {
+    background: #2c1a1a;
+    border: 2px solid #ff4444;
+    padding: 2.5rem;
+    border-radius: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.kotak-error.beres {
+    background: #1a2f1a;
+    border-color: var(--hijau);
+}
+
+/* Halaman Utama */
+.konten-utama {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.gambar-karakter {
+    max-width: 200px;
+    border-radius: 50%;
+    margin-bottom: 2rem;
+    border: 4px solid var(--hijau);
+}
+
+.judul-besar {
+    font-size: 2.5rem;
+    color: var(--hijau);
+    margin-bottom: 3rem;
+}
+
+.bagian {
+    background: var(--abu);
+    padding: 2rem;
+    border-radius: 15px;
+    border-left: 4px solid var(--hijau);
+    margin-bottom: 2.5rem;
+    text-align: left;
+}
+
+.bagian h2 {
+    margin-bottom: 1.5rem;
+}
+
+.album-foto {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+}
+
+.album-foto img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.album-foto img:hover {
+    transform: scale(1.05);
+}
+
+audio {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.kartu, .surat {
+    background: #1a2f1a;
+    padding: 2rem;
+    border-radius: 12px;
+    line-height: 1.8;
+}
+
+.tanda {
+    text-align: right;
+    margin-top: 1rem;
+    font-style: italic;
+    color: #88cc88;
+}
+
+.tombol-besar {
+    font-size: 1.3rem;
+    padding: 1rem 3rem;
+}
+
+/* Responsif */
+@media (max-width: 600px) {
+    .box { padding: 1.5rem; }
+    .angka-besar { font-size: 3.5rem; }
+    .judul-besar { font-size: 1.8rem; }
+    .bagian { padding: 1.2rem; }
+}
