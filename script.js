@@ -250,14 +250,14 @@ noButton.addEventListener("mouseenter", () => {
 
 frogButton.addEventListener("click", () => {
 
-    window.location.href = "pages/frog.html";
+    window.location.href = "Frog.html";
 
 });
 
 
 jhopeButton.addEventListener("click", () => {
 
-    window.location.href = "pages/jhope.html";
+    window.location.href = "Jhope.html";
 
 });
 
