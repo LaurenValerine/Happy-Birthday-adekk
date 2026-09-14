@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>J-Hope Birthday Experience</title>
+
+    <link rel="stylesheet" href="../css/jhope.css">
+</head>
+
+<body>
+
+    <main id="jhope-experience">
+
+        <!-- =========================
+             RIDDLE
+        ========================== -->
+
+        <section id="riddle-screen" class="screen active">
+
+            <div class="jhope-guide">
+                <img
+                    src="../assets/jhope/jhope-guide.png"
+                    alt="J-Hope"
+                >
+
+                <div class="guide-hint">
+                    <span>J-HOPE</span>
+                    <p>Petunjuk ada di sini.</p>
+                </div>
+            </div>
+
+            <div class="riddle-content">
+
+                <span class="chapter">
+                    CHAPTER 01
+                </span>
+
+                <h1>
+                    Teka-Teki
+                </h1>
+
+                <p class="riddle-text">
+                    Aku selalu datang setelah malam,
+                    tetapi bukan seseorang.
+                    Aku membawa cahaya,
+                    tetapi bukan lampu.
+                    Apakah aku?
+                </p>
+
+                <div class="answer-box">
+
+                    <input
+                        type="text"
+                        id="answer"
+                        placeholder="Masukkan jawaban..."
+                        autocomplete="off"
+                    >
+
+                    <button id="submit-answer">
+                        BUKA
+                    </button>
+
+                </div>
+
+                <p id="result"></p>
+
+            </div>
+
+            <div class="guide-arrow">
+                ↓
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             COUNTDOWN
+        ========================== -->
+
+        <section
+            id="countdown-screen"
+            class="screen"
+        >
+
+            <div class="code-background">
+
+                <span>INITIALIZING...</span>
+                <span>ACCESS CHECK...</span>
+                <span>JHOPE_ROUTE.EXE</span>
+                <span>MEMORY LOADED...</span>
+                <span>HOPE DETECTED...</span>
+                <span>SYSTEM READY...</span>
+
+            </div>
+
+            <div class="countdown-content">
+
+                <div class="jhope-mini-guide">
+                    <img
+                        src="../assets/jhope/jhope-guide.png"
+                        alt="J-Hope"
+                    >
+                </div>
+
+                <span class="chapter">
+                    ACCESS GRANTED
+                </span>
+
+                <div id="countdown-number">
+                    10
+                </div>
+
+                <p>
+                    Preparing your birthday experience...
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             CAKE
+        ========================== -->
+
+        <section
+            id="cake-screen"
+            class="screen"
+        >
+
+            <div class="jhope-corner-guide">
+                <img
+                    src="../assets/jhope/jhope-guide.png"
+                    alt="J-Hope"
+                >
+
+                <span>
+                    Jangan lupa bikin harapan.
+                </span>
+            </div>
+
+            <div class="cake-content">
+
+                <span class="chapter">
+                    CHAPTER 02
+                </span>
+
+                <h1>
+                    Make a Wish.
+                </h1>
+
+                <div class="cake-wrapper">
+
+                    <img
+                        src="../assets/cake/cake.png"
+                        alt="Birthday Cake"
+                        class="cake-image"
+                    >
+
+                </div>
+
+                <p>
+                    Satu lilin.
+                    Satu harapan.
+                    Satu hari istimewa.
+                </p>
+
+                <button
+                    id="cake-next"
+                    class="round-button"
+                >
+                    LANJUT
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             HAPPY BIRTHDAY RAIN
+        ========================== -->
+
+        <section
+            id="birthday-rain-screen"
+            class="screen"
+        >
+
+            <div
+                id="birthday-rain"
+                aria-hidden="true"
+            ></div>
+
+            <div class="rain-guide">
+
+                <img
+                    src="../assets/jhope/jhope-guide.png"
+                    alt="J-Hope"
+                >
+
+                <span>
+                    Lihat baik-baik...
+                </span>
+
+            </div>
+
+            <div class="birthday-rain-content">
+
+                <span class="chapter">
+                    CHAPTER 03
+                </span>
+
+                <h1>
+                    HAPPY BIRTHDAY
+                </h1>
+
+                <p>
+                    Ada sesuatu yang sedang
+                    disusun untukmu.
+                </p>
+
+                <button
+                    id="rain-next"
+                    class="round-button"
+                >
+                    LANJUT
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             GIFT
+        ========================== -->
+
+        <section
+            id="gift-screen"
+            class="screen"
+        >
+
+            <div class="gift-guide">
+
+                <img
+                    src="../assets/jhope/jhope-guide.png"
+                    alt="J-Hope"
+                >
+
+                <span>
+                    Coba klik hadiahnya.
+                </span>
+
+            </div>
+
+            <div class="gift-content">
+
+                <span class="chapter">
+                    CHAPTER 04
+                </span>
+
+                <h1>
+                    Ada sesuatu untukmu.
+                </h1>
+
+                <p>
+                    Jangan cuma dilihat.
+                    Klik.
+                </p>
+
+                <button
+                    id="gift-button"
+                    class="gift-button"
+                    aria-label="Buka hadiah"
+                >
+
+                    <img
+                        src="../assets/gift/gift.png"
+                        alt="Gift"
+                    >
+
+                </button>
+
+            </div>
+
+            <div
+                id="gift-explosion"
+                aria-hidden="true"
+            ></div>
+
+        </section>
+
+
+        <!-- =========================
+             ERROR
+        ========================== -->
+
+        <section
+            id="error-screen"
+            class="screen"
+        >
+
+            <div
+                id="error-background"
+                aria-hidden="true"
+            ></div>
+
+            <div class="error-guide">
+
+                <img
+                    src="../assets/jhope/jhope-guide.png"
+                    alt="J-Hope"
+                >
+
+            </div>
+
+            <div class="error-center">
+
+                <span class="chapter">
+                    SYSTEM
+                </span>
+
+                <div
+                    id="error-title"
+                    class="error-title"
+                >
+                    ERROR
+                </div>
+
+                <p id="error-message">
+                    Something went wrong.
+                </p>
+
+                <button
+                    id="white-error"
+                    class="white-error"
+                >
+                    ERROR
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             BIRTHDAY
+        ========================== -->
+
+        <section
+            id="birthday-screen"
+            class="screen birthday-screen"
+        >
+
+            <div class="birthday-guide">
+
+                <img
+                    src="../assets/jhope/jhope-guide.png"
+                    alt="J-Hope"
+                >
+
+                <div>
+                    <span>
+                        HAPPY BIRTHDAY
+                    </span>
+
+                    <p>
+                        Akhirnya sampai juga.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- HERO -->
+
+            <div class="birthday-hero">
+
+                <span class="chapter">
+                    FOR YOU
+                </span>
+
+                <h1>
+                    HAPPY<br>
+                    BIRTHDAY
+                </h1>
+
+                <p>
+                    Hari ini tentang kamu.
+                </p>
+
+            </div>
+
+
+            <!-- MEMORY -->
+
+            <section class="memory-section">
+
+                <span class="section-label">
+                    MEMORIES
+                </span>
+
+                <h2>
+                    Potongan Kenangan
+                </h2>
+
+                <p class="section-description">
+                    Beberapa halaman kecil
+                    dari cerita yang pernah ada.
+                </p>
+
+                <div
+                    id="memory-album"
+                    class="memory-album"
+                >
+
+                    <article class="memory-card">
+                        <div class="memory-placeholder">
+                            MEMORY 01
+                        </div>
+                    </article>
+
+                    <article class="memory-card">
+                        <div class="memory-placeholder">
+                            MEMORY 02
+                        </div>
+                    </article>
+
+                    <article class="memory-card">
+                        <div class="memory-placeholder">
+                            MEMORY 03
+                        </div>
+                    </article>
+
+                    <article class="memory-card">
+                        <div class="memory-placeholder">
+                            MEMORY 04
+                        </div>
+                    </article>
+
+                    <article class="memory-card">
+                        <div class="memory-placeholder">
+                            MEMORY 05
+                        </div>
+                    </article>
+
+                    <article class="memory-card">
+                        <div class="memory-placeholder">
+                            MEMORY 06
+                        </div>
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- SPOTIFY -->
+
+            <section class="spotify-section">
+
+                <span class="section-label">
+                    SOUNDTRACK
+                </span>
+
+                <h2>
+                    A Song For Today
+                </h2>
+
+                <div class="spotify-card">
+
+                    <div class="spotify-icon">
+                        ♪
+                    </div>
+
+                    <div class="spotify-info">
+
+                        <strong>
+                            Your Birthday Song
+                        </strong>
+
+                        <span>
+                            Spotify
+                        </span>
+
+                    </div>
+
+                    <button id="spotify-button">
+                        PLAY
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- CARD -->
+
+            <section class="card-section">
+
+                <span class="section-label">
+                    A LITTLE NOTE
+                </span>
+
+                <div class="birthday-card">
+
+                    <div class="card-front">
+
+                        <span>
+                            OPEN ME
+                        </span>
+
+                        <h2>
+                            Untukmu
+                        </h2>
+
+                        <small>
+                            TAP TO OPEN
+                        </small>
+
+                    </div>
+
+                    <div class="card-inside">
+
+                        <p>
+                            Semoga hari ini menyimpan
+                            lebih banyak harapan,
+                            tawa, dan momen yang layak
+                            dikenang.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- LETTER -->
+
+            <section class="letter-section">
+
+                <span class="section-label">
+                    LETTER
+                </span>
+
+                <article class="letter">
+
+                    <h2>
+                        Untuk seseorang
+                        yang sedang bertambah usia.
+                    </h2>
+
+                    <p>
+                        Hari ini mungkin hanya satu
+                        tanggal di antara banyak tanggal
+                        lainnya.
+                    </p>
+
+                    <p>
+                        Tetapi semoga kamu selalu
+                        menemukan alasan untuk
+                        menghargai perjalananmu sendiri,
+                        sekecil apa pun langkahnya.
+                    </p>
+
+                    <p>
+                        Semoga setiap hal baik yang
+                        sedang kamu perjuangkan
+                        perlahan menemukan jalannya.
+                    </p>
+
+                    <p>
+                        Tetap menjadi seseorang yang
+                        membawa sedikit harapan ke
+                        tempat-tempat yang kamu datangi.
+                    </p>
+
+                    <span class="letter-signature">
+                        Dari seseorang
+                    </span>
+
+                </article>
+
+            </section>
+
+
+            <!-- FINAL -->
+
+            <section class="final-section">
+
+                <span class="section-label">
+                    THE END?
+                </span>
+
+                <h2>
+                    Ceritanya belum selesai.
+                </h2>
+
+                <p>
+                    Masih ada satu tempat terakhir.
+                </p>
+
+                <button
+                    id="final-next"
+                    class="final-button"
+                >
+                    NEXT →
+                </button>
+
+            </section>
+
+        </section>
+
+    </main>
+
+    <script src="../js/jhope.js"></script>
+
+</body>
+</html>
