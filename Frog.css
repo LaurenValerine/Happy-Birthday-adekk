@@ -1,0 +1,1330 @@
+/* =========================================
+   FROG BIRTHDAY EXPERIENCE
+   FINAL CSS
+========================================= */
+
+
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    background: #020403;
+    color: #f4fff6;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.screen {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.screen:not(.active) {
+    display: none;
+}
+
+
+/* =========================================
+   GENERAL
+========================================= */
+
+.chapter,
+.section-label {
+    display: block;
+
+    color: rgba(125, 255, 155, 0.72);
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.section-label {
+    margin-bottom: 14px;
+}
+
+
+/* =========================================
+   RIDDLE
+========================================= */
+
+#riddle-screen {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 50px 20px;
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(75, 255, 125, 0.09),
+            transparent 38%
+        ),
+        #020403;
+}
+
+.frog-guide {
+    position: relative;
+
+    width: min(52vw, 240px);
+    height: min(52vw, 240px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 35px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(90, 255, 140, 0.12),
+            transparent 68%
+        );
+}
+
+.frog-main-image {
+    width: 85%;
+    height: 85%;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 20px 35px rgba(0, 0, 0, 0.5)
+        );
+
+    animation: frogFloat 4s ease-in-out infinite;
+}
+
+@keyframes frogFloat {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.riddle-content {
+    width: min(92vw, 620px);
+
+    padding: 40px;
+
+    border: 1px solid rgba(120, 255, 150, 0.18);
+    border-radius: 28px;
+
+    background:
+        rgba(255, 255, 255, 0.045);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 30px 100px rgba(0, 0, 0, 0.5);
+
+    text-align: center;
+}
+
+.riddle-content h1 {
+    margin: 14px 0 25px;
+
+    font-size: clamp(38px, 8vw, 62px);
+    line-height: 1;
+    letter-spacing: -2px;
+}
+
+.riddle-text {
+    margin-bottom: 30px;
+
+    color: rgba(255, 255, 255, 0.76);
+
+    font-size: 17px;
+    line-height: 1.8;
+}
+
+.answer-box {
+    display: flex;
+    gap: 10px;
+}
+
+#answer {
+    flex: 1;
+    min-width: 0;
+
+    padding: 16px 18px;
+
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 14px;
+
+    outline: none;
+
+    background: rgba(0, 0, 0, 0.35);
+
+    color: white;
+
+    transition:
+        border-color 0.3s,
+        box-shadow 0.3s;
+}
+
+#answer:focus {
+    border-color: rgba(100, 255, 140, 0.5);
+
+    box-shadow:
+        0 0 0 3px rgba(100, 255, 140, 0.07);
+}
+
+#answer::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+}
+
+#submit-answer {
+    padding: 16px 25px;
+
+    border: 0;
+    border-radius: 14px;
+
+    background: #f4fff6;
+    color: #061009;
+
+    font-weight: 800;
+    letter-spacing: 1px;
+
+    transition:
+        transform 0.25s,
+        box-shadow 0.25s;
+}
+
+#submit-answer:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 12px 30px rgba(255, 255, 255, 0.12);
+}
+
+#submit-answer:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+#result {
+    min-height: 22px;
+
+    margin-top: 16px;
+
+    color: rgba(255, 255, 255, 0.65);
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   COUNTDOWN
+========================================= */
+
+#countdown-screen {
+    align-items: center;
+    justify-content: center;
+
+    background: #000;
+
+    font-family:
+        "Courier New",
+        monospace;
+}
+
+#countdown-screen.active {
+    display: flex;
+}
+
+.code-background {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 22px;
+
+    padding: 30px;
+
+    overflow: hidden;
+
+    opacity: 0.22;
+
+    font-size: 12px;
+    line-height: 1.5;
+
+    color: #6cff91;
+}
+
+.code-background span:nth-child(even) {
+    transform: translateX(60px);
+}
+
+.code-background::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            transparent 50%,
+            rgba(80, 255, 120, 0.025) 50%
+        );
+
+    background-size: 100% 4px;
+
+    pointer-events: none;
+}
+
+.countdown-content {
+    position: relative;
+    z-index: 2;
+
+    text-align: center;
+}
+
+.countdown-content .chapter {
+    margin-bottom: 25px;
+}
+
+#countdown-number {
+    font-size: clamp(120px, 30vw, 260px);
+
+    font-weight: 900;
+
+    line-height: 0.9;
+
+    color: #eaffee;
+
+    text-shadow:
+        0 0 20px rgba(90, 255, 130, 0.35),
+        0 0 60px rgba(90, 255, 130, 0.15);
+}
+
+#countdown-number.pop {
+    animation: countdownPop 0.8s ease;
+}
+
+@keyframes countdownPop {
+    0% {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+
+    40% {
+        transform: scale(1.08);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.countdown-content p {
+    margin-top: 25px;
+
+    color: rgba(255, 255, 255, 0.5);
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+
+/* =========================================
+   CAKE
+========================================= */
+
+#cake-screen {
+    align-items: center;
+    justify-content: center;
+
+    padding: 60px 20px;
+
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(85, 255, 135, 0.08),
+            transparent 48%
+        );
+}
+
+#cake-screen.active {
+    display: flex;
+}
+
+.cake-content {
+    width: min(90vw, 650px);
+}
+
+.cake-content h1 {
+    margin: 14px 0 15px;
+
+    font-size: clamp(42px, 10vw, 78px);
+
+    letter-spacing: -3px;
+}
+
+.cake-content > p {
+    color: rgba(255, 255, 255, 0.6);
+
+    line-height: 1.7;
+}
+
+.cake-wrapper {
+    width: min(65vw, 320px);
+    height: min(65vw, 320px);
+
+    margin: 35px auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cake-image {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 25px 40px rgba(0, 0, 0, 0.5)
+        );
+
+    animation: cakeFloat 4s ease-in-out infinite;
+}
+
+@keyframes cakeFloat {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+.round-button {
+    margin-top: 28px;
+
+    padding: 14px 30px;
+
+    border: 1px solid rgba(120, 255, 150, 0.25);
+    border-radius: 999px;
+
+    background: rgba(90, 255, 130, 0.08);
+
+    color: white;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    transition: 0.3s;
+}
+
+.round-button:hover {
+    transform: translateY(-4px);
+
+    background: rgba(90, 255, 130, 0.16);
+}
+
+
+/* =========================================
+   BIRTHDAY RAIN
+========================================= */
+
+#birthday-rain-screen {
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(90, 255, 130, 0.07),
+            transparent 50%
+        );
+}
+
+#birthday-rain-screen.active {
+    display: flex;
+}
+
+#birthday-rain {
+    position: absolute;
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+}
+
+.rain-text {
+    position: absolute;
+
+    color: rgba(125, 255, 155, 0.8);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    white-space: nowrap;
+
+    animation:
+        birthdayFall linear forwards;
+}
+
+@keyframes birthdayFall {
+    from {
+        transform:
+            translateY(-80px)
+            rotate(var(--rotation));
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    to {
+        transform:
+            translateY(110vh)
+            rotate(var(--rotation));
+        opacity: 0;
+    }
+}
+
+.birthday-rain-content {
+    position: relative;
+    z-index: 2;
+
+    text-align: center;
+}
+
+.birthday-rain-content h1 {
+    margin: 15px 0;
+
+    font-size: clamp(38px, 9vw, 75px);
+
+    letter-spacing: -3px;
+}
+
+.birthday-rain-content p {
+    color: rgba(255, 255, 255, 0.55);
+}
+
+
+/* =========================================
+   GIFT
+========================================= */
+
+#gift-screen {
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 20px;
+
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(90, 255, 130, 0.07),
+            transparent 48%
+        );
+}
+
+#gift-screen.active {
+    display: flex;
+}
+
+.gift-content {
+    position: relative;
+    z-index: 2;
+}
+
+.gift-content h1 {
+    margin: 15px 0;
+
+    font-size: clamp(32px, 7vw, 58px);
+
+    letter-spacing: -2px;
+}
+
+.gift-content p {
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.gift-button {
+    width: min(55vw, 280px);
+    height: min(55vw, 280px);
+
+    margin-top: 30px;
+
+    border: 0;
+
+    background: transparent;
+
+    transition:
+        transform 0.3s ease;
+}
+
+.gift-button:hover {
+    transform: scale(1.07);
+}
+
+.gift-button img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 25px 35px rgba(0, 0, 0, 0.5)
+        );
+}
+
+
+/* =========================================
+   EXPLOSION
+========================================= */
+
+#gift-explosion {
+    position: absolute;
+    inset: 0;
+
+    z-index: 10;
+
+    pointer-events: none;
+
+    opacity: 0;
+}
+
+#gift-explosion.explode {
+    animation: explosionFlash 1.2s ease forwards;
+}
+
+@keyframes explosionFlash {
+    0% {
+        opacity: 0;
+        background: transparent;
+    }
+
+    20% {
+        opacity: 1;
+        background: white;
+    }
+
+    45% {
+        opacity: 0.8;
+        background: rgba(255, 255, 255, 0.7);
+    }
+
+    100% {
+        opacity: 0;
+        background: transparent;
+    }
+}
+
+
+/* =========================================
+   ERROR SCREEN
+========================================= */
+
+#error-screen {
+    background: #050000;
+
+    color: red;
+
+    font-family:
+        "Courier New",
+        monospace;
+}
+
+#error-screen.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#error-background {
+    position: absolute;
+    inset: -20%;
+
+    overflow: hidden;
+
+    pointer-events: none;
+}
+
+.error-word {
+    position: absolute;
+
+    color: #ff0000;
+
+    font-size: clamp(14px, 4vw, 32px);
+    font-weight: 900;
+
+    white-space: nowrap;
+
+    animation:
+        errorMove linear infinite;
+}
+
+@keyframes errorMove {
+    from {
+        transform:
+            translate(0, 0)
+            rotate(var(--rotation));
+    }
+
+    to {
+        transform:
+            translate(
+                var(--move-x),
+                var(--move-y)
+            )
+            rotate(var(--rotation));
+    }
+}
+
+.error-center {
+    position: relative;
+    z-index: 20;
+
+    text-align: center;
+}
+
+.error-title {
+    font-size: clamp(70px, 20vw, 180px);
+
+    font-weight: 900;
+
+    letter-spacing: -8px;
+
+    animation: errorGlitch 0.12s infinite;
+}
+
+@keyframes errorGlitch {
+    0% {
+        transform: translate(0);
+    }
+
+    25% {
+        transform: translate(4px, -2px);
+    }
+
+    50% {
+        transform: translate(-3px, 2px);
+    }
+
+    75% {
+        transform: translate(2px, 1px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
+
+.error-center p {
+    margin: 10px 0 35px;
+
+    color: rgba(255, 80, 80, 0.75);
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+}
+
+.white-error {
+    padding: 10px 18px;
+
+    border: 0;
+
+    background: white;
+    color: black;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size: 12px;
+    font-weight: 900;
+
+    box-shadow:
+        0 0 25px rgba(255, 255, 255, 0.2);
+
+    transition: transform 0.15s;
+}
+
+.white-error:hover {
+    transform: scale(1.08);
+}
+
+
+/* =========================================
+   BIRTHDAY SCREEN
+========================================= */
+
+#birthday-screen {
+    display: none;
+
+    overflow: visible;
+
+    background:
+        radial-gradient(
+            circle at 50% 5%,
+            rgba(80, 255, 130, 0.1),
+            transparent 30%
+        ),
+        #020403;
+}
+
+#birthday-screen.active {
+    display: block;
+}
+
+.birthday-frog {
+    display: flex;
+    justify-content: center;
+
+    padding-top: 70px;
+}
+
+.birthday-frog img {
+    width: min(40vw, 190px);
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 20px 30px rgba(0, 0, 0, 0.5)
+        );
+}
+
+.birthday-hero {
+    padding: 40px 20px 100px;
+
+    text-align: center;
+}
+
+.birthday-hero h1 {
+    margin: 20px 0;
+
+    font-size: clamp(65px, 17vw, 150px);
+
+    line-height: 0.82;
+
+    letter-spacing: -7px;
+}
+
+.birthday-hero p {
+    color: rgba(255, 255, 255, 0.55);
+
+    font-size: 14px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================
+   MEMORY
+========================================= */
+
+.memory-section,
+.spotify-section,
+.card-section,
+.letter-section,
+.final-section {
+    width: min(92vw, 1050px);
+
+    margin: 0 auto;
+
+    padding:
+        100px 0;
+}
+
+.memory-section h2,
+.spotify-section h2 {
+    margin-bottom: 12px;
+
+    font-size: clamp(35px, 7vw, 60px);
+
+    letter-spacing: -2px;
+}
+
+.section-description {
+    max-width: 500px;
+
+    margin-bottom: 45px;
+
+    color: rgba(255, 255, 255, 0.5);
+
+    line-height: 1.7;
+}
+
+.memory-album {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 18px;
+}
+
+.memory-card {
+    aspect-ratio: 1 / 1.15;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(120, 255, 150, 0.12);
+    border-radius: 20px;
+
+    background:
+        rgba(255, 255, 255, 0.035);
+}
+
+.memory-placeholder {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: rgba(125, 255, 155, 0.4);
+
+    font-size: 10px;
+    letter-spacing: 3px;
+}
+
+
+/* =========================================
+   SPOTIFY
+========================================= */
+
+.spotify-card {
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 22px;
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+
+    background:
+        rgba(255, 255, 255, 0.04);
+}
+
+.spotify-icon {
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background:
+        rgba(90, 255, 130, 0.1);
+
+    font-size: 24px;
+}
+
+.spotify-info {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.spotify-info strong {
+    font-size: 14px;
+}
+
+.spotify-info span {
+    color: rgba(255, 255, 255, 0.4);
+
+    font-size: 11px;
+}
+
+#spotify-button {
+    padding: 10px 18px;
+
+    border: 1px solid rgba(120, 255, 150, 0.25);
+    border-radius: 999px;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================
+   BIRTHDAY CARD
+========================================= */
+
+.card-section {
+    text-align: center;
+}
+
+.birthday-card {
+    position: relative;
+
+    width: min(90vw, 560px);
+    min-height: 320px;
+
+    margin: 40px auto 0;
+
+    border-radius: 25px;
+
+    background:
+        rgba(255, 255, 255, 0.055);
+
+    border: 1px solid rgba(120, 255, 150, 0.14);
+
+    overflow: hidden;
+}
+
+.card-front {
+    min-height: 320px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(80, 255, 130, 0.08),
+            transparent 60%
+        );
+}
+
+.card-front span {
+    color: rgba(125, 255, 155, 0.55);
+
+    font-size: 10px;
+    letter-spacing: 4px;
+}
+
+.card-front h2 {
+    margin-top: 15px;
+
+    font-size: 45px;
+}
+
+.card-inside {
+    padding: 35px;
+
+    color: rgba(255, 255, 255, 0.7);
+
+    line-height: 1.8;
+}
+
+
+/* =========================================
+   LETTER
+========================================= */
+
+.letter-section {
+    max-width: 800px;
+}
+
+.letter {
+    padding: 40px;
+
+    border-left: 1px solid rgba(125, 255, 155, 0.3);
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(90, 255, 130, 0.035),
+            transparent
+        );
+}
+
+.letter h2 {
+    margin-bottom: 30px;
+
+    font-size: clamp(28px, 6vw, 48px);
+
+    line-height: 1.1;
+}
+
+.letter p {
+    margin-bottom: 20px;
+
+    color: rgba(255, 255, 255, 0.65);
+
+    line-height: 1.9;
+}
+
+.letter-signature {
+    display: block;
+
+    margin-top: 35px;
+
+    color: rgba(255, 255, 255, 0.45);
+
+    font-style: italic;
+}
+
+
+/* =========================================
+   FINAL
+========================================= */
+
+.final-section {
+    min-height: 70vh;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.final-section h2 {
+    margin: 15px 0;
+
+    font-size: clamp(35px, 8vw, 65px);
+
+    letter-spacing: -2px;
+}
+
+.final-section p {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.final-button {
+    margin-top: 35px;
+
+    padding: 17px 38px;
+
+    border: 1px solid rgba(125, 255, 155, 0.3);
+    border-radius: 999px;
+
+    background:
+        rgba(90, 255, 130, 0.08);
+
+    color: white;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    transition: 0.3s;
+}
+
+.final-button:hover {
+    transform: translateY(-5px);
+
+    background:
+        rgba(90, 255, 130, 0.16);
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    #riddle-screen {
+        padding: 35px 15px;
+    }
+
+    .frog-guide {
+        width: 175px;
+        height: 175px;
+
+        margin-bottom: 25px;
+    }
+
+    .riddle-content {
+        padding: 30px 20px;
+    }
+
+    .riddle-text {
+        font-size: 15px;
+    }
+
+    .answer-box {
+        flex-direction: column;
+    }
+
+    #answer,
+    #submit-answer {
+        width: 100%;
+    }
+
+    .cake-wrapper {
+        width: 240px;
+        height: 240px;
+    }
+
+    .birthday-hero {
+        padding-bottom: 60px;
+    }
+
+    .birthday-hero h1 {
+        letter-spacing: -4px;
+    }
+
+    .memory-album {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .memory-card {
+        border-radius: 14px;
+    }
+
+    .memory-section,
+    .spotify-section,
+    .card-section,
+    .letter-section,
+    .final-section {
+        padding:
+            70px 0;
+    }
+
+    .spotify-card {
+        padding: 15px;
+    }
+
+    .spotify-icon {
+        width: 45px;
+        height: 45px;
+    }
+
+    .letter {
+        padding: 25px;
+
+        border-left: 0;
+        border-top: 1px solid rgba(125, 255, 155, 0.25);
+    }
+
+    .birthday-card {
+        min-height: 280px;
+    }
+
+    .card-front {
+        min-height: 280px;
+    }
+}
+
+
+/* =========================================
+   VERY SMALL SCREEN
+========================================= */
+
+@media (max-width: 380px) {
+
+    .riddle-content {
+        padding: 25px 17px;
+    }
+
+    .birthday-hero h1 {
+        font-size: 58px;
+    }
+
+    .memory-album {
+        gap: 8px;
+    }
+
+    .spotify-card {
+        gap: 10px;
+    }
+
+    #spotify-button {
+        padding: 8px 12px;
+    }
+}
+
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
