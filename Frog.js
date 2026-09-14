@@ -641,31 +641,12 @@ function resetErrorScreen() {
 // 8. TOMBOL NEXT
 // =====================================================
 
-const tombolNext =
-    document.getElementById("tombol-next");
-
+const tombolNext = document.getElementById("tombol-next");
 
 if (tombolNext) {
-
     tombolNext.addEventListener("click", () => {
-
-        /*
-         * LINK WEBSITE BERIKUTNYA
-         *
-         * Nanti ganti URL di bawah.
-         *
-         * Contoh:
-         *
-         * window.location.href =
-         * "https://contoh.com";
-         */
-
-        alert(
-            "THE STORY CONTINUES... 🐸💚"
-        );
-
+        window.location.href = "https://htmlku.my.id/xmOgm";
     });
-
 }
 
 
