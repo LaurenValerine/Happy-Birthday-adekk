@@ -1,249 +1,458 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html,
-body {
-    width: 100%;
-    height: 100%;
-}
-
-body {
-    background: #050505;
-    color: white;
-    font-family: Arial, sans-serif;
-    overflow: hidden;
-}
-
-.hidden {
-    display: none !important;
-}
+/* =========================================
+   BIRTHDAY EXPERIENCE
+   OPENING SCRIPT - FINAL
+========================================= */
 
 
-/* LOADING */
+/* =========================================
+   ELEMENTS
+========================================= */
 
-#loading-screen {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
+const loadingScreen = document.getElementById("loading-screen");
+const opening = document.getElementById("opening");
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+const fireworkSection = document.getElementById("firework-section");
+const fireworks = document.getElementById("fireworks");
+const openingText = document.querySelector(".opening-text h1");
 
-    background: #050505;
-}
+const continueSection = document.getElementById("continue-section");
+const yesButton = document.getElementById("yes-button");
+const noButton = document.getElementById("no-button");
 
-.loading-content {
-    text-align: center;
-}
+const messageSection = document.getElementById("message-section");
+const typingText = document.getElementById("typing-text");
 
-.loading-content p {
-    font-size: 14px;
-    letter-spacing: 4px;
-}
+const pathSection = document.getElementById("path-section");
+const frogButton = document.getElementById("frog-button");
+const jhopeButton = document.getElementById("jhope-button");
 
 
-/* OPENING */
+/* =========================================
+   MESSAGE
+========================================= */
 
-#opening {
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
+const birthdayMessage =
+"Wahai ratu katak yang amat sungguh mulia istri dari sang raja katak J-Hope sekaligus Adek dari calon...calon apa nyakkk?calon pendamping? Calon masa depan? Bomat ahhh masih mumet ama dia mahhhh intinya mohon pilih SALAH SATU dibawah ini dan TIDAK BISA DUA untuk melanjutkan";
+
+
+/* =========================================
+   UTILITY
+========================================= */
+
+function wait(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 
-/* ALL SCREENS */
-
-#firework-section,
-#continue-section,
-#message-section,
-#path-section {
-    width: 100%;
-    height: 100vh;
-}
-
-
-/* FIREWORK */
-
-#firework-section {
-    position: relative;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    overflow: hidden;
-}
-
-#fireworks {
-    position: absolute;
-    inset: 0;
-}
-
-.opening-text {
-    position: relative;
-    z-index: 2;
-
-    text-align: center;
-    padding: 25px;
-}
-
-.opening-text h1 {
-    font-size: clamp(28px, 7vw, 60px);
-    opacity: 0;
-}
-
-
-/* DIALOG */
-
-#continue-section,
-#message-section {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 20px;
-}
-
-.dialog-box {
-    width: min(90%, 550px);
-
-    padding: 30px;
-
-    border: 1px solid rgba(255,255,255,.2);
-    border-radius: 20px;
-
-    background: rgba(255,255,255,.06);
-
-    backdrop-filter: blur(15px);
-
-    text-align: center;
-}
-
-.dialog-box > p:first-child {
-    margin-bottom: 25px;
-
-    font-size: clamp(20px, 5vw, 30px);
-}
-
-
-/* BUTTON */
-
-.choice-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-
-.choice-buttons button {
-    min-width: 100px;
-
-    padding: 13px 25px;
-
-    border: none;
-    border-radius: 999px;
-
-    background: white;
-    color: black;
-
-    font-weight: bold;
-    cursor: pointer;
-}
-
-
-/* TYPING */
-
-#typing-text {
-    min-height: 180px;
-
-    text-align: left;
-
-    font-size: 16px;
-    line-height: 1.8;
-}
-
-
-/* PATH */
-
-#path-section {
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
-
-    padding: 20px;
-
-    text-align: center;
-}
-
-#path-section h2 {
-    margin-bottom: 10px;
-
-    font-size: clamp(28px, 7vw, 45px);
-}
-
-#path-section > p {
-    margin-bottom: 35px;
-
-    font-size: 12px;
-    letter-spacing: 3px;
-}
-
-
-/* PATH BUTTON */
-
-.path-buttons {
-    display: flex;
-
-    justify-content: center;
-
-    gap: 20px;
-}
-
-.path-buttons button {
-    width: 160px;
-    height: 160px;
-
-    border: 1px solid rgba(255,255,255,.2);
-    border-radius: 25px;
-
-    background: rgba(255,255,255,.07);
-    color: white;
-
-    font-weight: bold;
-    cursor: pointer;
-
-    transition: .3s;
-}
-
-.path-buttons button:hover {
-    transform: translateY(-8px);
-}
-
-.path-buttons span {
-    display: block;
-    margin-top: 10px;
-}
-
-
-@media (max-width: 600px) {
-
-    .path-buttons {
-        gap: 12px;
+function show(element) {
+    if (element) {
+        element.classList.remove("hidden");
     }
+}
 
-    .path-buttons button {
-        width: 140px;
-        height: 140px;
+
+function hide(element) {
+    if (element) {
+        element.classList.add("hidden");
     }
+}
 
-    #typing-text {
-        font-size: 14px;
+
+/* =========================================
+   SCREEN CONTROL
+========================================= */
+
+function hideAllOpeningScreens() {
+
+    hide(fireworkSection);
+    hide(continueSection);
+    hide(messageSection);
+    hide(pathSection);
+
+}
+
+
+function showScreen(screen) {
+
+    hideAllOpeningScreens();
+
+    show(screen);
+
+}
+
+
+/* =========================================
+   FIREWORK
+========================================= */
+
+function createFirework() {
+
+    if (!fireworks) return;
+
+    const firework = document.createElement("div");
+
+    firework.textContent = "✦";
+
+    firework.style.position = "absolute";
+
+    firework.style.left =
+        Math.random() * 100 + "%";
+
+    firework.style.top =
+        Math.random() * 70 + "%";
+
+    firework.style.fontSize =
+        Math.floor(Math.random() * 30 + 20) + "px";
+
+    firework.style.color = "#ffffff";
+
+    firework.style.opacity = "0";
+
+    firework.style.transform = "scale(0.3)";
+
+    firework.style.transition =
+        "opacity 0.25s ease, transform 0.6s ease";
+
+    fireworks.appendChild(firework);
+
+
+    requestAnimationFrame(() => {
+
+        firework.style.opacity = "1";
+
+        firework.style.transform = "scale(1.8)");
+
+    });
+
+
+    setTimeout(() => {
+
+        firework.style.opacity = "0";
+
+    }, 450);
+
+
+    setTimeout(() => {
+
+        firework.remove();
+
+    }, 900);
+
+}
+
+
+async function fireworkShow() {
+
+    for (let i = 0; i < 18; i++) {
+
+        createFirework();
+
+        await wait(160);
+
     }
 
 }
+
+
+/* =========================================
+   TYPING EFFECT
+========================================= */
+
+async function typeText(text, speed = 30) {
+
+    if (!typingText) return;
+
+    typingText.textContent = "";
+
+    for (let i = 0; i < text.length; i++) {
+
+        typingText.textContent += text[i];
+
+        await wait(speed);
+
+    }
+
+}
+
+
+/* =========================================
+   OPENING SEQUENCE
+========================================= */
+
+async function startOpening() {
+
+    /*
+        Pastikan loading terlihat
+        ketika halaman pertama kali dibuka.
+    */
+
+    if (loadingScreen) {
+        loadingScreen.classList.remove("hidden");
+    }
+
+
+    /*
+        Opening juga dipersiapkan.
+    */
+
+    if (opening) {
+        opening.classList.remove("hidden");
+    }
+
+
+    /*
+        Tunggu loading.
+    */
+
+    await wait(1800);
+
+
+    /*
+        HILANGKAN LOADING
+    */
+
+    hide(loadingScreen);
+
+
+    /*
+        Tampilkan fireworks.
+    */
+
+    showScreen(fireworkSection);
+
+
+    /*
+        Fireworks mulai.
+    */
+
+    await fireworkShow();
+
+
+    /*
+        Tunggu sebentar.
+    */
+
+    await wait(400);
+
+
+    /*
+        Tampilkan tulisan.
+    */
+
+    if (openingText) {
+
+        openingText.style.transition =
+            "opacity 1s ease, transform 1s ease";
+
+        openingText.style.transform =
+            "translateY(0)";
+
+        openingText.style.opacity = "1";
+
+    }
+
+
+    /*
+        Beri waktu membaca tulisan.
+    */
+
+    await wait(1800);
+
+
+    /*
+        Masuk ke dialog.
+    */
+
+    showScreen(continueSection);
+
+}
+
+
+/* =========================================
+   YA BUTTON
+========================================= */
+
+if (yesButton) {
+
+    yesButton.addEventListener("click", async () => {
+
+        /*
+            Hilangkan dialog.
+        */
+
+        hide(continueSection);
+
+
+        await wait(350);
+
+
+        /*
+            Tampilkan pesan.
+        */
+
+        showScreen(messageSection);
+
+
+        await wait(500);
+
+
+        /*
+            Efek mengetik.
+        */
+
+        await typeText(
+            birthdayMessage,
+            28
+        );
+
+
+        await wait(900);
+
+
+        /*
+            Masuk pilihan.
+        */
+
+        showScreen(pathSection);
+
+    });
+
+}
+
+
+/* =========================================
+   TIDAK BUTTON
+========================================= */
+
+if (noButton) {
+
+    noButton.addEventListener("click", () => {
+
+        swapButtons();
+
+    });
+
+
+    /*
+        Desktop:
+        tombol TIDAK kabur.
+    */
+
+    noButton.addEventListener("mouseenter", () => {
+
+        if (window.innerWidth <= 600) {
+            return;
+        }
+
+
+        const maxX =
+            Math.max(
+                10,
+                window.innerWidth -
+                noButton.offsetWidth -
+                10
+            );
+
+
+        const maxY =
+            Math.max(
+                10,
+                window.innerHeight -
+                noButton.offsetHeight -
+                10
+            );
+
+
+        const x =
+            Math.random() * maxX;
+
+
+        const y =
+            Math.random() * maxY;
+
+
+        noButton.style.position = "fixed";
+
+        noButton.style.left =
+            x + "px";
+
+        noButton.style.top =
+            y + "px";
+
+    });
+
+}
+
+
+/* =========================================
+   SWAP YA / TIDAK
+========================================= */
+
+function swapButtons() {
+
+    if (!yesButton || !noButton) {
+        return;
+    }
+
+
+    const parent =
+        yesButton.parentElement;
+
+
+    if (!parent) {
+        return;
+    }
+
+
+    if (yesButton.nextElementSibling === noButton) {
+
+        parent.insertBefore(
+            noButton,
+            yesButton
+        );
+
+    } else {
+
+        parent.insertBefore(
+            yesButton,
+            noButton
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   PATH SELECTION
+========================================= */
+
+if (frogButton) {
+
+    frogButton.addEventListener("click", () => {
+
+        window.location.href =
+            "Frog.html";
+
+    });
+
+}
+
+
+if (jhopeButton) {
+
+    jhopeButton.addEventListener("click", () => {
+
+        window.location.href =
+            "Jhope.html";
+
+    });
+
+}
+
+
+/* =========================================
+   START
+========================================= */
+
+startOpening();
