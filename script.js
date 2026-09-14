@@ -1,269 +1,249 @@
-/* =========================
-   BIRTHDAY EXPERIENCE
-   OPENING SCRIPT
-========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
 
-/* =========================
-   ELEMENTS
-========================= */
+body {
+    background: #050505;
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
 
-const loadingScreen = document.getElementById("loading-screen");
-const opening = document.getElementById("opening");
-
-const fireworkSection = document.getElementById("firework-section");
-const fireworks = document.getElementById("fireworks");
-
-const openingText = document.querySelector(".opening-text h1");
-
-const continueSection = document.getElementById("continue-section");
-const yesButton = document.getElementById("yes-button");
-const noButton = document.getElementById("no-button");
-
-const messageSection = document.getElementById("message-section");
-const typingText = document.getElementById("typing-text");
-
-const pathSection = document.getElementById("path-section");
-const frogButton = document.getElementById("frog-button");
-const jhopeButton = document.getElementById("jhope-button");
-
-
-/* =========================
-   OPENING MESSAGE
-========================= */
-
-const birthdayMessage =
-"Wahai ratu katak yang amat sungguh mulia istri dari sang raja katak J-Hope sekaligus Adek dari calon...calon apa nyakkk?calon pendamping? Calon masa depan? Bomat ahhh masih mumet ama dia mahhhh intinya mohon pilih SALAH SATU dibawah ini dan TIDAK BISA DUA untuk melanjutkan";
-
-
-/* =========================
-   HELPER
-========================= */
-
-function wait(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+.hidden {
+    display: none !important;
 }
 
 
-/* =========================
-   SHOW / HIDE
-========================= */
+/* LOADING */
 
-function show(element) {
-    element.classList.remove("hidden");
+#loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #050505;
 }
 
-function hide(element) {
-    element.classList.add("hidden");
+.loading-content {
+    text-align: center;
 }
 
-
-/* =========================
-   FIREWORK
-========================= */
-
-function createFirework() {
-
-    const firework = document.createElement("div");
-
-    firework.textContent = "✦";
-
-    firework.style.position = "absolute";
-    firework.style.left = Math.random() * 100 + "%";
-    firework.style.top = Math.random() * 70 + "%";
-    firework.style.fontSize =
-        Math.floor(Math.random() * 30 + 20) + "px";
-
-    firework.style.color = "#ffffff";
-    firework.style.opacity = "0";
-
-    firework.style.transition =
-        "opacity 0.2s ease, transform 0.6s ease";
-
-    fireworks.appendChild(firework);
-
-    requestAnimationFrame(() => {
-
-        firework.style.opacity = "1";
-        firework.style.transform = "scale(1.8)";
-
-    });
-
-    setTimeout(() => {
-        firework.style.opacity = "0";
-    }, 500);
-
-    setTimeout(() => {
-        firework.remove();
-    }, 900);
+.loading-content p {
+    font-size: 14px;
+    letter-spacing: 4px;
 }
 
 
-/* =========================
-   FIREWORK SHOW
-========================= */
+/* OPENING */
 
-async function fireworkShow() {
+#opening {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
 
-    for (let i = 0; i < 12; i++) {
 
-        createFirework();
+/* ALL SCREENS */
 
-        await wait(180);
+#firework-section,
+#continue-section,
+#message-section,
+#path-section {
+    width: 100%;
+    height: 100vh;
+}
+
+
+/* FIREWORK */
+
+#firework-section {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+#fireworks {
+    position: absolute;
+    inset: 0;
+}
+
+.opening-text {
+    position: relative;
+    z-index: 2;
+
+    text-align: center;
+    padding: 25px;
+}
+
+.opening-text h1 {
+    font-size: clamp(28px, 7vw, 60px);
+    opacity: 0;
+}
+
+
+/* DIALOG */
+
+#continue-section,
+#message-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+}
+
+.dialog-box {
+    width: min(90%, 550px);
+
+    padding: 30px;
+
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 20px;
+
+    background: rgba(255,255,255,.06);
+
+    backdrop-filter: blur(15px);
+
+    text-align: center;
+}
+
+.dialog-box > p:first-child {
+    margin-bottom: 25px;
+
+    font-size: clamp(20px, 5vw, 30px);
+}
+
+
+/* BUTTON */
+
+.choice-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.choice-buttons button {
+    min-width: 100px;
+
+    padding: 13px 25px;
+
+    border: none;
+    border-radius: 999px;
+
+    background: white;
+    color: black;
+
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+/* TYPING */
+
+#typing-text {
+    min-height: 180px;
+
+    text-align: left;
+
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+
+/* PATH */
+
+#path-section {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    text-align: center;
+}
+
+#path-section h2 {
+    margin-bottom: 10px;
+
+    font-size: clamp(28px, 7vw, 45px);
+}
+
+#path-section > p {
+    margin-bottom: 35px;
+
+    font-size: 12px;
+    letter-spacing: 3px;
+}
+
+
+/* PATH BUTTON */
+
+.path-buttons {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 20px;
+}
+
+.path-buttons button {
+    width: 160px;
+    height: 160px;
+
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 25px;
+
+    background: rgba(255,255,255,.07);
+    color: white;
+
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.path-buttons button:hover {
+    transform: translateY(-8px);
+}
+
+.path-buttons span {
+    display: block;
+    margin-top: 10px;
+}
+
+
+@media (max-width: 600px) {
+
+    .path-buttons {
+        gap: 12px;
     }
-}
 
-
-/* =========================
-   TYPING EFFECT
-========================= */
-
-async function typeText(text, speed = 35) {
-
-    typingText.textContent = "";
-
-    for (let i = 0; i < text.length; i++) {
-
-        typingText.textContent += text[i];
-
-        await wait(speed);
+    .path-buttons button {
+        width: 140px;
+        height: 140px;
     }
-}
 
-
-/* =========================
-   LOADING
-========================= */
-
-async function startOpening() {
-
-    await wait(1800);
-
-    hide(loadingScreen);
-    show(opening);
-
-    await wait(500);
-
-    fireworkShow();
-
-    await wait(700);
-
-    openingText.style.transition =
-        "opacity 1s ease";
-
-    openingText.style.opacity = "1";
-
-    await wait(1800);
-
-    show(continueSection);
-}
-
-
-/* =========================
-   YES BUTTON
-========================= */
-
-yesButton.addEventListener("click", async () => {
-
-    hide(continueSection);
-
-    await wait(400);
-
-    show(messageSection);
-
-    await wait(500);
-
-    await typeText(birthdayMessage, 30);
-
-    await wait(800);
-
-    hide(messageSection);
-
-    await wait(400);
-
-    show(pathSection);
-});
-
-
-/* =========================
-   NO BUTTON
-========================= */
-
-noButton.addEventListener("click", () => {
-
-    swapButtons();
-});
-
-
-/* =========================
-   SWAP YES / NO
-========================= */
-
-function swapButtons() {
-
-    const parent = yesButton.parentElement;
-
-    if (yesButton.nextElementSibling === noButton) {
-
-        parent.insertBefore(
-            noButton,
-            yesButton
-        );
-
-    } else {
-
-        parent.insertBefore(
-            yesButton,
-            noButton
-        );
+    #typing-text {
+        font-size: 14px;
     }
+
 }
-
-
-/* =========================
-   EXTRA NO BUTTON BEHAVIOR
-========================= */
-
-noButton.addEventListener("mouseenter", () => {
-
-    if (window.innerWidth > 600) {
-
-        const x =
-            Math.random() *
-            (window.innerWidth - noButton.offsetWidth);
-
-        const y =
-            Math.random() *
-            (window.innerHeight - noButton.offsetHeight);
-
-        noButton.style.position = "fixed";
-
-        noButton.style.left = x + "px";
-        noButton.style.top = y + "px";
-    }
-});
-
-
-/* =========================
-   PATH SELECTION
-========================= */
-
-frogButton.addEventListener("click", () => {
-
-    window.location.href = "Frog.html";
-
-});
-
-
-jhopeButton.addEventListener("click", () => {
-
-    window.location.href = "Jhope.html";
-
-});
-
-
-/* =========================
-   START
-========================= */
-
-startOpening();
