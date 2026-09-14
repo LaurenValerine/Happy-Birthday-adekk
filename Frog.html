@@ -3,135 +3,564 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐸 KATAK — Happy Birthday</title>
+
+    <title>🐸 KATAK | Birthday Experience</title>
+
     <link rel="stylesheet" href="Frog.css">
 </head>
+
 <body>
 
-    <!-- ============= TEKA-TEKI / SANDI ============= -->
+    <!-- ==================================================
+         1. SANDI / TEKA-TEKI
+    ================================================== -->
+
     <section id="sandi-screen" class="screen active">
+
         <div class="box">
-            <h2>🔑 Masukkan Sandi</h2>
-            <p class="soal">Aku punya kaki, tetapi tidak bisa berjalan. Aku bisa hidup di air dan di darat. Siapakah aku?</p>
-            <input type="text" id="jawaban-sandi" placeholder="Jawabanmu...">
-            <button id="kirim-sandi">Kirim 📤</button>
-            <p id="sandi-salah" class="salah hidden">Katanya RATU KATAK Masa Gatau😝</p>
+
+            <div class="icon">🐸</div>
+
+            <h1>🔐 MASUKKAN SANDI</h1>
+
+            <p class="soal">
+                Aku punya kaki, tetapi tidak bisa berjalan.
+                Aku bisa hidup di air dan di darat.
+                Siapakah aku?
+            </p>
+
+            <input
+                type="text"
+                id="jawaban-sandi"
+                placeholder="Tulis jawabanmu..."
+                autocomplete="off"
+            >
+
+            <button id="kirim-sandi">
+                KIRIM 📤
+            </button>
+
+            <p id="sandi-salah" class="salah hidden">
+                Katanya RATU KATAK, masa gatau 😝
+            </p>
+
         </div>
+
     </section>
 
-    <!-- ============= COUNTDOWN ============= -->
+
+    <!-- ==================================================
+         2. COUNTDOWN 10 - 0
+    ================================================== -->
+
     <section id="hitung-screen" class="screen hidden">
+
         <div class="box tengah">
-            <h2>⏳ Bersiap...</h2>
-            <p id="angka-hitung" class="angka-besar">10</p>
+
+            <p class="label-kecil">
+                ACCESS GRANTED
+            </p>
+
+            <h2>
+                SYSTEM INITIALIZING...
+            </h2>
+
+            <div id="angka-hitung" class="angka-besar">
+                10
+            </div>
+
+            <p class="loading-text">
+                Preparing your surprise...
+            </p>
+
         </div>
+
     </section>
 
-    <!-- ============= KUE ============= -->
+
+    <!-- ==================================================
+         3. KUE
+    ================================================== -->
+
     <section id="kue-screen" class="screen hidden">
+
         <div class="box tengah">
-            <h2>🎂 Kue Ulang Tahun</h2>
-            <img src="gambar/kue.png" alt="Kue Ulang Tahun" id="gambar-kue" class="gambar-kue">
-            <p class="petunjuk">🕯️ Nyalakan lilinnya dulu ya...</p>
-            <button id="tiup-lilin">Tiup Lilin 💨</button>
+
+            <p class="label-kecil">
+                STEP 01
+            </p>
+
+            <h2>
+                🎂 SEBUAH KUE
+            </h2>
+
+            <img
+                src="gambar/kue.png"
+                alt="Kue ulang tahun"
+                id="gambar-kue"
+                class="gambar-kue"
+            >
+
+            <p class="petunjuk">
+                🕯️ Lilinnya belum ditiup...
+            </p>
+
+            <button id="tiup-lilin">
+                TIUP LILIN 💨
+            </button>
+
         </div>
+
     </section>
 
-    <!-- ============= FINAL COUNTDOWN ============= -->
+
+    <!-- ==================================================
+         4. FINAL COUNTDOWN
+    ================================================== -->
+
     <section id="final-hitung-screen" class="screen hidden">
+
         <div class="box tengah">
-            <h2>✨ Hitung Mundur Terakhir</h2>
-            <p id="angka-final" class="angka-besar">3</p>
+
+            <p class="label-kecil">
+                FINAL SEQUENCE
+            </p>
+
+            <div id="angka-final" class="angka-besar">
+                3
+            </div>
+
+            <p class="final-label">
+                GET READY
+            </p>
+
+            <p class="final-sub">
+                YOUR SURPRISE IS LOADING...
+            </p>
+
         </div>
+
     </section>
 
-    <!-- ============= HUJAN HAPPY BIRTHDAY ============= -->
+
+    <!-- ==================================================
+         5. HUJAN HAPPY BIRTHDAY
+    ================================================== -->
+
     <section id="hujan-screen" class="screen hidden">
-        <div class="box penuh">
+
+        <div class="birthday-stage">
+
             <div id="wadah-hujan"></div>
+
             <div id="bentuk-hati" class="hidden">
-                 HAPPY BIRTHDAY 
+                HAPPY BIRTHDAY
             </div>
-            <button id="lanjut-kado" class="hidden">Lanjut ➡️</button>
+
+            <button
+                id="lanjut-kado"
+                class="hidden"
+            >
+                LANJUT ➜
+            </button>
+
         </div>
+
     </section>
 
-    <!-- ============= KADO ============= -->
+
+    <!-- ==================================================
+         6. KADO
+    ================================================== -->
+
     <section id="kado-screen" class="screen hidden">
+
         <div class="box tengah">
-            <h2>🎁 Ada Kado Buat Kamu!</h2>
-            <img src="gambar/kado.png" alt="Kado" id="gambar-kado" class="gambar-kado">
-            <p class="petunjuk">👉 Klik kado untuk membuka</p>
+
+            <p class="label-kecil">
+                STEP 02
+            </p>
+
+            <h2>
+                🎁 ADA SESUATU...
+            </h2>
+
+            <img
+                src="gambar/kado.png"
+                alt="Kado ulang tahun"
+                id="gambar-kado"
+                class="gambar-kado"
+            >
+
+            <p class="petunjuk">
+                👉 Klik kadonya untuk membuka
+            </p>
+
         </div>
+
     </section>
 
-    <!-- ============= ERROR ============= -->
+
+    <!-- ==================================================
+         7. ERROR SEQUENCE
+    ================================================== -->
+
     <section id="error-screen" class="screen hidden">
-        <div class="kotak-error" id="kotak-error">
-            <h3>⚠️ SISTEM ERROR</h3>
-            <p id="teks-error">Klik untuk memperbaiki...</p>
-            <span id="hitungan-klik">0/5</span>
+
+        <div id="error-background"></div>
+
+        <div
+            class="kotak-error"
+            id="kotak-error"
+        >
+
+            <div class="error-symbol">
+                ⚠
+            </div>
+
+            <h2>
+                SYSTEM ERROR
+            </h2>
+
+            <p id="teks-error">
+                Surprise.exe has stopped working.
+            </p>
+
+            <button id="error-button">
+                ERROR
+            </button>
+
+            <span id="hitungan-klik">
+                0/3
+            </span>
+
         </div>
+
     </section>
 
-    <!-- ============= HALAMAN UTAMA ============= -->
+
+    <!-- ==================================================
+         8. HALAMAN ULANG TAHUN
+    ================================================== -->
+
     <section id="utama-screen" class="screen hidden">
-        <div class="konten-utama">
-            <img src="gambar/katak-utama.png" alt="Katak" class="gambar-karakter">
-            <h1 class="judul-besar">HAPPY BIRTHDAY 🐸💚</h1>
 
-            <!-- Album Foto -->
-            <div class="bagian">
-                <h2>📸 </h2>
+        <main class="konten-utama">
+
+
+            <!-- ===============================
+                 KARAKTER KATAK
+            =============================== -->
+
+            <div class="karakter-wrapper">
+
+                <img
+                    src="gambar/katak-utama.png"
+                    alt="Katak"
+                    class="gambar-karakter"
+                >
+
+            </div>
+
+
+            <!-- ===============================
+                 HAPPY BIRTHDAY
+            =============================== -->
+
+            <section class="hero-birthday">
+
+                <p class="hero-small">
+                    TODAY IS YOUR DAY
+                </p>
+
+                <h1 class="judul-besar">
+                    HAPPY
+                    <br>
+                    BIRTHDAY
+                </h1>
+
+                <div class="frog-decoration">
+                    🐸
+                </div>
+
+                <p class="hero-caption">
+                    For the one and only Ratu Katak 💚
+                </p>
+
+            </section>
+
+
+            <!-- ===============================
+                 MEMORY ALBUM
+            =============================== -->
+
+            <section class="bagian album-section">
+
+                <p class="section-label">
+                    MEMORY ARCHIVE
+                </p>
+
+                <h2>
+                    📸 OUR MEMORIES
+                </h2>
+
+                <p class="section-description">
+                    Sepuluh potongan kecil dari cerita
+                    yang pernah terjadi.
+                </p>
+
                 <div class="album-foto">
-                    <img src="gambar/foto-1.jpg" alt="Foto 1">
-                    <img src="gambar/foto-2.jpg" alt="Foto 2">
-                    <img src="gambar/foto-3.jpg" alt="Foto 3">
-                    <img src="gambar/foto-4.jpg" alt="Foto 4">
-                    <img src="gambar/foto-5.jpg" alt="Foto 5">
-                    <img src="gambar/foto-6.jpg" alt="Foto 6">
-                    <img src="gambar/foto-7.jpg" alt="Foto 7">
-                    <img src="gambar/foto-8.jpg" alt="Foto 8">
-                    <img src="gambar/foto-9.jpg" alt="Foto 9">
-                    <img src="gambar/foto-10.jpg" alt="Foto 10">
+
+                    <div class="foto-item">
+                        <img
+                            src="gambar/foto-1.jpg"
+                            alt="Memory 1"
+                        >
+                    </div>
+
+                    <div class="foto-item">
+                        <img
+                            src="gambar/foto-2.jpg"
+                            alt="Memory 2"
+                        >
+                    </div>
+
+                    <div class="foto-item">
+                        <img
+                            src="gambar/foto-3.jpg"
+                            alt="Memory 3"
+                        >
+                    </div>
+
+                    <div class="foto-item">
+                        <img
+                            src="gambar/foto-4.jpg"
+                            alt="Memory 4"
+                        >
+                    </div>
+
+                    <div class="foto-item">
+                        <img
+                            src="gambar/foto-5.jpg"
+                            alt="Memory 5"
+                        >
+                    </div>
+
+                    <div class="foto-item">
+                        <img
+                            src="gambar/foto-6.jpg"
+                            alt="Memory 6"
+                        >
+                    </div>
+
+                    <div class="foto-item">
+                        <img
+                            src="gambar/foto-7.jpg"
+                            alt="Memory 7"
+                        >
+                    </div>
+
+                    <div class="foto-item">
+                        <img
+                            src="gambar/foto-8.jpg"
+                            alt="Memory 8"
+                        >
+                    </div>
+
+                    <div class="foto-item">
+                        <img
+                            src="gambar/foto-9.jpg"
+                            alt="Memory 9"
+                        >
+                    </div>
+
+                    <div class="foto-item">
+                        <img
+                            src="gambar/foto-10.jpg"
+                            alt="Memory 10"
+                        >
+                    </div>
+
                 </div>
-            </div>
 
-            <!-- Musik -->
-            <div class="bagian">
-                <h2>🎵 Lagu Spesial</h2>
-                <audio controls>
-                    <source src="gambar/lagu-ultah.mp3" type="audio/mpeg">
-                    Browser tidak mendukung pemutar musik.
-                
-            </div>
+            </section>
 
-            <!-- Kartu -->
-            <div class="bagian">
-                <h2>💌 Kartu Ucapan</h2>
+
+            <!-- ===============================
+                 MUSIK
+            =============================== -->
+
+            <section class="bagian musik-section">
+
+                <p class="section-label">
+                    SOUNDTRACK
+                </p>
+
+                <h2>
+                    🎵 A SONG FOR YOU
+                </h2>
+
+                <div class="music-player">
+
+                    <p>
+                        Lagu spesial untuk hari ini
+                    </p>
+
+                    <audio controls>
+
+                        <source
+                            src="gambar/lagu-ultah.mp3"
+                            type="audio/mpeg"
+                        >
+
+                        Browser tidak mendukung
+                        pemutar musik.
+
+                    </audio>
+
+                </div>
+
+            </section>
+
+
+            <!-- ===============================
+                 KARTU UCAPAN
+            =============================== -->
+
+            <section class="bagian">
+
+                <p class="section-label">
+                    LITTLE MESSAGE
+                </p>
+
+                <h2>
+                    💌 A LITTLE CARD
+                </h2>
+
                 <div class="kartu">
-                    <p>Habedeeee adekkkkk! 🎉🐸</p>
-                    <p>Semoga hari ini seindah senyummu, dan tahun ini penuh kebahagiaan untukmu.</p>
-                    <p class="tanda">— Dari incess krakatau untuk sang Ratu katak 💚</p>
-                </div>
-            </div>
 
-            <!-- Surat -->
-            <div class="bagian">
-                <h2>💚 Suratku Untukmu</h2>
+                    <p class="card-title">
+                        Habedeeee adekkkkk! 🎉🐸
+                    </p>
+
+                    <p>
+                        Semoga hari ini seindah senyummu,
+                        dan tahun ini dipenuhi hal-hal
+                        baik yang tidak pernah kamu sangka.
+                    </p>
+
+                    <p>
+                        Semoga semua yang sedang kamu
+                        perjuangkan perlahan menemukan
+                        jalannya.
+                    </p>
+
+                    <p class="tanda">
+                        Dari incess krakatau
+                        untuk sang Ratu Katak 💚
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- ===============================
+                 SURAT
+            =============================== -->
+
+            <section class="bagian surat-section">
+
+                <p class="section-label">
+                    FINAL MESSAGE
+                </p>
+
+                <h2>
+                    💚 SURAT UNTUKMU
+                </h2>
+
                 <div class="surat">
-                    <p>Ni Hao...</p>
-                    <p>Di hari spesial ini, saya inces krakatau cuma mau bilang: terima kasih sudah ada di dunia ini, terima kasih sudah menjadi dirimu yang luar biasa. Setiap harinya kamu memberi warna, seperti katak yang membawa keberuntungan di hutan ini 🍃</p>
-                    <p>Semoga semua impianmu perlahan terwujud. Aku akan selalu ada di sini, mendukungmu, menyayangimu.</p>
-                    <p>Selamat ulang tahun, wahai ratu katak. 🐸💚</p>
-                </div>
-            </div>
 
-            <!-- Tombol Berikutnya -->
-            <button id="tombol-next" class="tombol-besar">NEXT ➡️</button>
-        </div>
+                    <p>
+                        Ni Hao...
+                    </p>
+
+                    <p>
+                        Di hari spesial ini, saya inces
+                        krakatau cuma mau bilang:
+                        terima kasih sudah ada di dunia ini.
+                    </p>
+
+                    <p>
+                        Terima kasih sudah menjadi dirimu
+                        sendiri. Semoga perjalananmu ke
+                        depan dipenuhi banyak hal baik,
+                        orang-orang baik, dan alasan untuk
+                        terus tersenyum.
+                    </p>
+
+                    <p>
+                        Semoga semua impianmu perlahan
+                        menemukan jalannya untuk menjadi
+                        nyata.
+                    </p>
+
+                    <p>
+                        Selamat ulang tahun,
+                        wahai Ratu Katak. 🐸💚
+                    </p>
+
+                    <p class="signature">
+                        — Incess Krakatau
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- ===============================
+                 NEXT
+            =============================== -->
+
+            <section class="next-section">
+
+                <p>
+                    THE STORY ISN'T OVER YET...
+                </p>
+
+                <button
+                    id="tombol-next"
+                    class="tombol-besar"
+                >
+                    NEXT ➜
+                </button>
+
+            </section>
+
+
+            <!-- ===============================
+                 FOOTER
+            =============================== -->
+
+            <footer>
+
+                <p>
+                    🐸 Made with chaos, memories &amp; love
+                </p>
+
+            </footer>
+
+        </main>
+
     </section>
 
-<script src="Frog.js"></script>
+
+    <!-- ==================================================
+         JAVASCRIPT
+    ================================================== -->
+
+    <script src="Frog.js"></script>
+
 </body>
-</html>
+    </html> 
