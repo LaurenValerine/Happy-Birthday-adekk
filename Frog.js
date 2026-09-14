@@ -212,7 +212,7 @@ if (tombolTiup) {
 
 
 // =====================================================
-// 4. HUJAN HAPPY BIRTHDAY
+// 4. HUJAN HAPPY BIRTHDAY → MEMBENTUK LOVE
 // =====================================================
 
 async function mulaiHujanTeks() {
@@ -230,16 +230,16 @@ async function mulaiHujanTeks() {
     if (!wadah) return;
 
 
-    // Bersihkan hujan sebelumnya
     wadah.innerHTML = "";
 
 
-    const kata =
-        "HAPPY BIRTHDAY";
+    // -----------------------------------------------
+    // HUJAN TEKS
+    // -----------------------------------------------
 
+    const jumlah = 70;
 
-    // Membuat banyak teks jatuh
-    for (let i = 0; i < 35; i++) {
+    for (let i = 0; i < jumlah; i++) {
 
         setTimeout(() => {
 
@@ -250,51 +250,123 @@ async function mulaiHujanTeks() {
                 "teks-jatuh";
 
             teks.textContent =
-                kata;
+                "HAPPY BIRTHDAY";
 
 
-            // Posisi random
             teks.style.left =
-                Math.random() * 90 + "%";
+                Math.random() * 100 + "%";
 
 
-            // Delay random
             teks.style.animationDelay =
-                Math.random() * 0.5 + "s";
+                Math.random() * 0.8 + "s";
 
-
-            // Ukuran random
-            const ukuran =
-                12 + Math.random() * 14;
 
             teks.style.fontSize =
-                ukuran + "px";
+                (10 + Math.random() * 12) + "px";
 
 
             wadah.appendChild(teks);
 
 
-            // Hapus setelah selesai
             setTimeout(() => {
-
                 teks.remove();
-
             }, 4000);
 
-        }, i * 100);
+        }, i * 50);
 
     }
 
 
-    // Tunggu hujan selesai
-    await wait(4500);
+    // Tunggu hujan
+    await wait(4000);
 
 
-    // =================================================
-    // MEMUNCULKAN HAPPY BIRTHDAY
-    // =================================================
+    // -----------------------------------------------
+    // BENTUK LOVE
+    // -----------------------------------------------
+
+    if (wadah) {
+
+        wadah.innerHTML = "";
+
+        const jumlahLove = 160;
+
+        for (let i = 0; i < jumlahLove; i++) {
+
+            const t =
+                (Math.PI * 2 * i) / jumlahLove;
+
+            /*
+             * Rumus parametrik LOVE
+             *
+             * x = 16 sin³(t)
+             * y = 13 cos(t)
+             *     - 5 cos(2t)
+             *     - 2 cos(3t)
+             *     - cos(4t)
+             */
+
+            const x =
+                16 *
+                Math.pow(Math.sin(t), 3);
+
+            const y =
+                13 * Math.cos(t)
+                - 5 * Math.cos(2 * t)
+                - 2 * Math.cos(3 * t)
+                - Math.cos(4 * t);
+
+
+            const teks =
+                document.createElement("span");
+
+            teks.className =
+                "love-text";
+
+            teks.textContent =
+                "HAPPY BIRTHDAY";
+
+
+            const posX =
+                50 + x * 2.3;
+
+            const posY =
+                45 - y * 2.3;
+
+
+            teks.style.left =
+                posX + "%";
+
+            teks.style.top =
+                posY + "%";
+
+
+            teks.style.animationDelay =
+                (i * 0.008) + "s";
+
+
+            wadah.appendChild(teks);
+
+        }
+
+    }
+
+
+    // -----------------------------------------------
+    // TUNGGU LOVE TERBENTUK
+    // -----------------------------------------------
+
+    await wait(2500);
+
+
+    // -----------------------------------------------
+    // TAMPILKAN TULISAN TENGAH
+    // -----------------------------------------------
 
     if (hati) {
+
+        hati.textContent =
+            "HAPPY BIRTHDAY";
 
         hati.classList.remove("hidden");
 
@@ -303,12 +375,12 @@ async function mulaiHujanTeks() {
     }
 
 
-    await wait(1200);
+    await wait(1500);
 
 
-    // =================================================
-    // TOMBOL KADO
-    // =================================================
+    // -----------------------------------------------
+    // LANJUT KE KADO
+    // -----------------------------------------------
 
     if (tombol) {
 
