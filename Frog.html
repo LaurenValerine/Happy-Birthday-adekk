@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Frog Birthday Experience</title>
+
+    <link rel="stylesheet" href="../css/frog.css">
+</head>
+
+<body>
+
+    <!-- =========================================
+         FROG BIRTHDAY EXPERIENCE
+    ========================================== -->
+
+    <main id="frog-experience">
+
+
+        <!-- =====================================
+             01. RIDDLE
+        ====================================== -->
+
+        <section id="riddle-screen" class="screen active">
+
+            <div class="frog-guide">
+
+                <!-- ASET KATAK NANTI -->
+                <img
+                    src="../assets/frog/frog-guide.png"
+                    alt="Frog"
+                    class="frog-main-image"
+                >
+
+            </div>
+
+
+            <div class="riddle-content">
+
+                <span class="chapter">
+                    CHAPTER 01
+                </span>
+
+                <h1>
+                    Teka-Teki
+                </h1>
+
+                <p class="riddle-text">
+                    Aku punya kaki, tetapi tidak bisa berjalan.
+                    Aku bisa hidup di air dan di darat.
+                    Siapakah aku?
+                </p>
+
+                <div class="answer-box">
+
+                    <input
+                        type="text"
+                        id="answer"
+                        placeholder="Masukkan jawaban..."
+                        autocomplete="off"
+                    >
+
+                    <button id="submit-answer">
+                        BUKA
+                    </button>
+
+                </div>
+
+                <p id="result"></p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             02. COUNTDOWN
+        ====================================== -->
+
+        <section
+            id="countdown-screen"
+            class="screen"
+        >
+
+            <div class="code-background">
+
+                <span>INITIALIZING...</span>
+                <span>ACCESS CHECK...</span>
+                <span>FROG_ROUTE.EXE</span>
+                <span>MEMORY LOADED...</span>
+                <span>WELCOME...</span>
+                <span>SYSTEM READY...</span>
+
+            </div>
+
+
+            <div class="countdown-content">
+
+                <span class="chapter">
+                    ACCESS GRANTED
+                </span>
+
+                <div id="countdown-number">
+                    10
+                </div>
+
+                <p>
+                    Preparing your birthday experience...
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             03. CAKE
+        ====================================== -->
+
+        <section
+            id="cake-screen"
+            class="screen"
+        >
+
+            <div class="cake-content">
+
+                <span class="chapter">
+                    CHAPTER 02
+                </span>
+
+                <h1>
+                    Make a Wish.
+                </h1>
+
+
+                <div class="cake-wrapper">
+
+                    <img
+                        src="../assets/cake/cake.png"
+                        alt="Birthday Cake"
+                        class="cake-image"
+                    >
+
+                </div>
+
+
+                <p>
+                    Satu lilin.
+                    Satu harapan.
+                    Satu hari istimewa.
+                </p>
+
+                <button
+                    id="cake-next"
+                    class="round-button"
+                >
+                    LANJUT
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             04. HAPPY BIRTHDAY RAIN
+        ====================================== -->
+
+        <section
+            id="birthday-rain-screen"
+            class="screen"
+        >
+
+            <div
+                id="birthday-rain"
+                aria-hidden="true"
+            ></div>
+
+
+            <div class="birthday-rain-content">
+
+                <span class="chapter">
+                    CHAPTER 03
+                </span>
+
+                <h1>
+                    HAPPY BIRTHDAY
+                </h1>
+
+                <p>
+                    Sebuah kejutan kecil sedang turun.
+                </p>
+
+                <button
+                    id="rain-next"
+                    class="round-button"
+                >
+                    LANJUT
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             05. GIFT
+        ====================================== -->
+
+        <section
+            id="gift-screen"
+            class="screen"
+        >
+
+            <div class="gift-content">
+
+                <span class="chapter">
+                    CHAPTER 04
+                </span>
+
+                <h1>
+                    Ada sesuatu untukmu.
+                </h1>
+
+                <p>
+                    Jangan cuma dilihat.
+                    Klik.
+                </p>
+
+
+                <button
+                    id="gift-button"
+                    class="gift-button"
+                    aria-label="Buka hadiah"
+                >
+
+                    <img
+                        src="../assets/gift/gift.png"
+                        alt="Gift"
+                    >
+
+                </button>
+
+            </div>
+
+
+            <!-- EXPLOSION EFFECT -->
+
+            <div
+                id="gift-explosion"
+                aria-hidden="true"
+            ></div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             06. ERROR
+        ====================================== -->
+
+        <section
+            id="error-screen"
+            class="screen"
+        >
+
+            <div
+                id="error-background"
+                aria-hidden="true"
+            ></div>
+
+
+            <div class="error-center">
+
+                <div
+                    id="error-title"
+                    class="error-title"
+                >
+                    ERROR
+                </div>
+
+                <p id="error-message">
+                    Something went wrong.
+                </p>
+
+                <button
+                    id="white-error"
+                    class="white-error"
+                >
+                    ERROR
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             07. BIRTHDAY PAGE
+        ====================================== -->
+
+        <section
+            id="birthday-screen"
+            class="screen birthday-screen"
+        >
+
+            <!-- FROG -->
+
+            <div class="birthday-frog">
+
+                <img
+                    src="../assets/frog/frog-guide.png"
+                    alt="Frog"
+                >
+
+            </div>
+
+
+            <!-- HAPPY BIRTHDAY -->
+
+            <div class="birthday-hero">
+
+                <span class="chapter">
+                    FOR YOU
+                </span>
+
+                <h1>
+                    HAPPY<br>
+                    BIRTHDAY
+                </h1>
+
+                <p>
+                    Hari ini tentang kamu.
+                </p>
+
+            </div>
+
+
+
+            <!-- =================================
+                 MEMORY ALBUM
+            ================================== -->
+
+            <section class="memory-section">
+
+                <span class="section-label">
+                    MEMORIES
+                </span>
+
+                <h2>
+                    Potongan Kenangan
+                </h2>
+
+                <p class="section-description">
+                    Beberapa halaman kecil
+                    dari cerita yang pernah ada.
+                </p>
+
+
+                <div
+                    id="memory-album"
+                    class="memory-album"
+                >
+
+                    <!--
+                        FOTO ALBUM AKAN DIMASUKKAN
+                        PALING AKHIR.
+                    -->
+
+                    <article class="memory-card">
+
+                        <div class="memory-placeholder">
+                            MEMORY 01
+                        </div>
+
+                    </article>
+
+                    <article class="memory-card">
+
+                        <div class="memory-placeholder">
+                            MEMORY 02
+                        </div>
+
+                    </article>
+
+                    <article class="memory-card">
+
+                        <div class="memory-placeholder">
+                            MEMORY 03
+                        </div>
+
+                    </article>
+
+                    <article class="memory-card">
+
+                        <div class="memory-placeholder">
+                            MEMORY 04
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================
+                 SPOTIFY
+            ================================== -->
+
+            <section class="spotify-section">
+
+                <span class="section-label">
+                    SOUNDTRACK
+                </span>
+
+                <h2>
+                    A Song For Today
+                </h2>
+
+
+                <div class="spotify-card">
+
+                    <div class="spotify-icon">
+                        ♪
+                    </div>
+
+                    <div class="spotify-info">
+
+                        <strong>
+                            Your Birthday Song
+                        </strong>
+
+                        <span>
+                            Spotify
+                        </span>
+
+                    </div>
+
+                    <button id="spotify-button">
+                        PLAY
+                    </button>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================
+                 BIRTHDAY CARD
+            ================================== -->
+
+            <section class="card-section">
+
+                <span class="section-label">
+                    A LITTLE NOTE
+                </span>
+
+                <div class="birthday-card">
+
+                    <div class="card-front">
+
+                        <span>
+                            OPEN ME
+                        </span>
+
+                        <h2>
+                            Untukmu
+                        </h2>
+
+                    </div>
+
+                    <div class="card-inside">
+
+                        <p>
+                            Semoga hari ini menyimpan
+                            lebih banyak harsa daripada
+                            yang bisa kamu ceritakan.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================
+                 LETTER
+            ================================== -->
+
+            <section class="letter-section">
+
+                <span class="section-label">
+                    LETTER
+                </span>
+
+                <article class="letter">
+
+                    <h2>
+                        Untuk seseorang
+                        yang sedang bertambah usia.
+                    </h2>
+
+                    <p>
+                        Hari ini mungkin hanya satu
+                        tanggal di antara banyak tanggal
+                        lainnya.
+                    </p>
+
+                    <p>
+                        Tetapi semoga kamu selalu
+                        menemukan alasan untuk tetap
+                        menghargai perjalananmu sendiri,
+                        sekecil apa pun langkahnya.
+                    </p>
+
+                    <p>
+                        Selamat bertambah usia.
+                        Semoga segala hal baik yang
+                        sedang kamu perjuangkan
+                        perlahan menemukan jalannya.
+                    </p>
+
+                    <span class="letter-signature">
+                        — dari seseorang
+                    </span>
+
+                </article>
+
+            </section>
+
+
+
+            <!-- =================================
+                 NEXT
+            ================================== -->
+
+            <section class="final-section">
+
+                <span class="section-label">
+                    THE END?
+                </span>
+
+                <h2>
+                    Ceritanya belum selesai.
+                </h2>
+
+                <p>
+                    Masih ada satu tempat terakhir.
+                </p>
+
+                <button
+                    id="final-next"
+                    class="final-button"
+                >
+                    NEXT →
+                </button>
+
+            </section>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================
+         SCRIPT
+    ========================================== -->
+
+    <script src="../js/frog.js"></script>
+
+</body>
+</html>
