@@ -7,7 +7,7 @@
 // KONFIGURASI
 // =====================================================
 
-const JAWABAN_SANDI = "j-hope;
+const JAWABAN_SANDI = "j-hope";
 const KLIK_ERROR = 3;
 
 
