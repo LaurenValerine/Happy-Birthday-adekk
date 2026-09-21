@@ -161,17 +161,17 @@ function mulaiHitungMundur(id, mulai, selesai) {
 
 
 // =====================================================
-// 3. KUE — TIUP LILIN
+// 3. KUE — AMBIL KUE
 // =====================================================
 
 const tombolAmbilKue =
-    document.getElementById("ambil-kue");
+    document.getElementById("tiup-lilin");
 
 const gambarKue =
     document.getElementById("gambar-kue");
 
 
-if (tomboAmbilKue) {
+if (tombolAmbilKue) {
 
     tombolAmbilKue.addEventListener(
         "click",
@@ -180,7 +180,7 @@ if (tomboAmbilKue) {
             tombolAmbilKue.disabled = true;
 
 
-            // Efek kue
+            // Efek kue saat diambil
             if (gambarKue) {
 
                 gambarKue.style.transition =
@@ -198,7 +198,7 @@ if (tomboAmbilKue) {
             await wait(600);
 
 
-            // Kembalikan tampilan
+            // Kembalikan tampilan kue
             if (gambarKue) {
 
                 gambarKue.style.transform =
@@ -213,7 +213,7 @@ if (tomboAmbilKue) {
             await wait(300);
 
 
-            // Countdown terakhir
+            // Masuk countdown terakhir
             tampilkanLayar(
                 "final-hitung-screen"
             );
@@ -237,7 +237,6 @@ if (tomboAmbilKue) {
     );
 
 }
-
 
 // =====================================================
 // 4. HUJAN HAPPY BIRTHDAY → LOVE
