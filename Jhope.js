@@ -164,20 +164,20 @@ function mulaiHitungMundur(id, mulai, selesai) {
 // 3. KUE — TIUP LILIN
 // =====================================================
 
-const tombolTiup =
+const tombolAmbilKue =
     document.getElementById("ambil-kue");
 
 const gambarKue =
     document.getElementById("gambar-kue");
 
 
-if (tombolTiup) {
+if (tomboAmbilKue) {
 
-    tombolTiup.addEventListener(
+    tombolAmbilKue.addEventListener(
         "click",
         async () => {
 
-            tombolTiup.disabled = true;
+            tombolAmbilKue.disabled = true;
 
 
             // Efek kue
