@@ -1,34 +1,54 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>🐿 JHOPE | Birthday Experience</title>
 
-    <link rel="stylesheet" href="Jhope.css">
+    <link
+        rel="stylesheet"
+        href="Jhope.css"
+    >
+
 </head>
 
+
 <body>
+
 
     <!-- ==================================================
          1. SANDI / TEKA-TEKI
     ================================================== -->
 
-    <section id="sandi-screen" class="screen active">
+    <section
+        id="sandi-screen"
+        class="screen active"
+    >
 
         <div class="box">
 
-            <div class="icon">🐿</div>
+            <div class="icon">
+                🐿
+            </div>
 
-            <h1>🔐 MASUKKAN SANDI</h1>
+            <h1>
+                🔐 MASUKKAN SANDI
+            </h1>
 
             <p class="soal">
                 Aku bukan matahari,
                 tapi namaku membawa harapan.
                 Aku suka menari dan berada di atas panggung.
                 Senyumku sering membawa energi cerah,
-                dan aku adalah bagian dari tujuh orang yang                    berjalan bersama.
+                dan aku adalah bagian dari tujuh orang
+                yang berjalan bersama.
                 Siapakah aku?
             </p>
 
@@ -43,8 +63,12 @@
                 KIRIM 📤
             </button>
 
-            <p id="sandi-salah" class="salah hidden">
-                Katanya ISTRI JHOPE, masa gatau 😝
+            <p
+                id="sandi-salah"
+                class="salah hidden"
+            >
+                Katanya ISTRI JHOPE,
+                masa gatau 😝
             </p>
 
         </div>
@@ -52,11 +76,15 @@
     </section>
 
 
+
     <!-- ==================================================
          2. COUNTDOWN 10 - 0
     ================================================== -->
 
-    <section id="hitung-screen" class="screen hidden">
+    <section
+        id="hitung-screen"
+        class="screen hidden"
+    >
 
         <div class="box tengah">
 
@@ -68,7 +96,10 @@
                 SYSTEM INITIALIZING...
             </h2>
 
-            <div id="angka-hitung" class="angka-besar">
+            <div
+                id="angka-hitung"
+                class="angka-besar"
+            >
                 10
             </div>
 
@@ -81,11 +112,15 @@
     </section>
 
 
+
     <!-- ==================================================
          3. KUE
     ================================================== -->
 
-    <section id="kue-screen" class="screen hidden">
+    <section
+        id="kue-screen"
+        class="screen hidden"
+    >
 
         <div class="box tengah">
 
@@ -108,8 +143,8 @@
                 🎂 Kue nya belum diambil...
             </p>
 
-            <button id="ambil kue">
-               AMBIL KUE 🍰
+            <button id="tiup-lilin">
+                AMBIL KUE 🍰
             </button>
 
         </div>
@@ -117,11 +152,15 @@
     </section>
 
 
+
     <!-- ==================================================
          4. FINAL COUNTDOWN
     ================================================== -->
 
-    <section id="final-hitung-screen" class="screen hidden">
+    <section
+        id="final-hitung-screen"
+        class="screen hidden"
+    >
 
         <div class="box tengah">
 
@@ -129,7 +168,10 @@
                 FINAL SEQUENCE
             </p>
 
-            <div id="angka-final" class="angka-besar">
+            <div
+                id="angka-final"
+                class="angka-besar"
+            >
                 3
             </div>
 
@@ -146,17 +188,24 @@
     </section>
 
 
+
     <!-- ==================================================
          5. HUJAN HAPPY BIRTHDAY
     ================================================== -->
 
-    <section id="hujan-screen" class="screen hidden">
+    <section
+        id="hujan-screen"
+        class="screen hidden"
+    >
 
         <div class="birthday-stage">
 
             <div id="wadah-hujan"></div>
 
-            <div id="bentuk-hati" class="hidden">
+            <div
+                id="bentuk-hati"
+                class="hidden"
+            >
                 HAPPY BIRTHDAY
             </div>
 
@@ -172,11 +221,15 @@
     </section>
 
 
+
     <!-- ==================================================
          6. KADO
     ================================================== -->
 
-    <section id="kado-screen" class="screen hidden">
+    <section
+        id="kado-screen"
+        class="screen hidden"
+    >
 
         <div class="box tengah">
 
@@ -204,292 +257,357 @@
     </section>
 
 
+
     <!-- ==================================================
          7. ERROR SEQUENCE
     ================================================== -->
 
-    <section id="error-screen" class="screen hidden">
+    <section
+        id="error-screen"
+        class="screen hidden"
+    >
 
-    <div id="error-background"></div>
+        <div id="error-background"></div>
 
-    <div class="kotak-error" id="kotak-error">
+        <div
+            class="kotak-error"
+            id="kotak-error"
+        >
 
-        <div class="error-symbol">
-            ⚠
+            <div class="error-symbol">
+                ⚠
+            </div>
+
+            <h2>
+                SYSTEM ERROR
+            </h2>
+
+            <p id="teks-error">
+                Surprise.exe has stopped working.
+            </p>
+
+            <button id="error-button">
+                ERROR
+            </button>
+
+            <span id="hitungan-klik">
+                0/3
+            </span>
+
         </div>
 
-        <h2>
-            SYSTEM ERROR
-        </h2>
-
-        <p id="teks-error">
-            Surprise.exe has stopped working.
-        </p>
-
-        <button id="error-button">
-            ERROR
-        </button>
-
-        <span id="hitungan-klik">
-            0/3
-        </span>
-
-    </div>
-
     </section>
+
 
 
     <!-- ==================================================
          8. HALAMAN ULANG TAHUN
     ================================================== -->
-       <!-- ==================================================
-     HALAMAN UTAMA
-================================================== -->
 
-<section id="utama-screen" class="screen hidden">
+    <section
+        id="utama-screen"
+        class="screen hidden"
+    >
 
-    <main class="konten-utama">
+        <main class="konten-utama">
 
-        <!-- ===============================
-             JHOPE
-        =============================== -->
 
-        <div class="karakter-wrapper">
+            <!-- ===============================
+                 J-HOPE
+            =============================== -->
 
-            <img
-                src="1000543958-removebg-preview"
-                alt="Jhope"
-                class="gambar-karakter"
+            <div class="karakter-wrapper">
+
+                <img
+                    src="1000543958-removebg-preview"
+                    alt="J-Hope"
+                    class="gambar-karakter"
+                >
+
+            </div>
+
+
+
+            <!-- ===============================
+                 UCAPAN
+            =============================== -->
+
+            <section
+                class="bagian ucapan-section"
             >
 
-        </div>
-
-
-        <!-- ===============================
-             UCAPAN
-        =============================== -->
-
-        <section class="bagian ucapan-section">
-
-            <p class="section-label">
-                SPECIAL DAY
-            </p>
-
-            <h1 class="judul-besar">
-                HAPPY BIRTHDAY
-            </h1>
-
-            <div class="ucapan">
-
-                <p class="ucapan-title">
-                    Habedeeee adekkkkk! 🎉🐸💚
+                <p class="section-label">
+                    SPECIAL DAY
                 </p>
 
-                <p>
-                    Selamat ulang tahun untuk sang
-                    Ratu Katak.
-                </p>
+                <h1 class="judul-besar">
+                    HAPPY BIRTHDAY
+                </h1>
 
-                <p>
-                    Semoga hari ini menjadi salah satu
-                    hari yang paling menyenangkan,
-                    dan semoga tahun ini membawa
-                    banyak hal baik untukmu.
-                </p>
+                <div class="ucapan">
 
-                <p>
-                    Tetap jadi kamu yang unik,
-                    menyebalkan, lucu, dan tentunya
-                    tetap menjadi Ratu Katak. 🐸
-                </p>
+                    <p class="ucapan-title">
+                        HABEDEEEEE ADEKKKKK! 🎉🐿️🤎
+                    </p>
 
-            </div>
+                    <p>
+                        Selamat ulang tahun untuk
+                        istri J-Hope tercinta.
+                    </p>
 
-        </section>
+                    <p>
+                        Semoga hari ini menjadi salah
+                        satu hari yang paling
+                        menyenangkan, dan semoga
+                        tahun ini membawa banyak
+                        hal baik untukmu.
+                    </p>
 
+                    <p>
+                        Tetap jadi kamu yang unik,
+                        lucu, menyebalkan, dan
+                        tentunya tetap menjadi
+                        istri J-Hope. 🐿️🤎
+                    </p>
 
-        <!-- ===============================
-             ALBUM
-        =============================== -->
-
-        <section class="bagian album-section">
-
-            <p class="section-label">
-                MEMORY ARCHIVE
-            </p>
-
-            <h2>
-                📸 ALBUM
-            </h2>
-
-            <div class="album-foto">
-
-                <div class="foto-item">
-                    <img src="IMG-20260914-WA0108.jpg" alt="Memory 1">
                 </div>
 
-                <div class="foto-item">
-                    <img src="IMG-20260914-WA0109.jpg" alt="Memory 2">
-                </div>
-
-                <div class="foto-item">
-                    <img src="IMG-20260914-WA0111.jpg" alt="Memory 3">
-                </div>
-
-                <div class="foto-item">
-                    <img src="IMG-20260914-WA0118.jpg" alt="Memory 4">
-                </div>
-
-                <div class="foto-item">
-                    <img src="IMG-20260914-WA0110.jpg" alt="Memory 5">
-                </div>
-
-                <div class="foto-item">
-                    <img src="IMG-20260914-WA0117.jpg" alt="Memory 6">
-                </div>
-
-                <div class="foto-item">
-                    <img src="IMG-20260914-WA0107.jpg" alt="Memory 7">
-                </div>
-
-                <div class="foto-item">
-                    <img src="IMG-20260914-WA0113.jpg" alt="Memory 8">
-                </div>
-
-                <div class="foto-item">
-                    <img src="IMG-20260912-WA0009(1).jpg" alt="Memory 9">
-                </div>
-
-                <div class="foto-item">
-                    <img src="IMG-20260914-WA0115.jpg" alt="Memory 10">
-                </div>
-
-            </div>
-
-        </section>
+            </section>
 
 
-        <!-- ===============================
-             SPOTIFY
-        =============================== -->
 
-        <section class="bagian spotify-section">
+            <!-- ===============================
+                 ALBUM
+            =============================== -->
 
-            <p class="section-label">
-                SOUNDTRACK
-            </p>
-
-            <h2>
-                🎵 SPOTIFY
-            </h2>
-
-            <div class="spotify-box">
-
-                <!--
-                    Nanti iframe Spotify dimasukkan di sini.
-                -->
-
-                <iframe
-                    src="https://open.spotify.com/embed/track/54ZIksXv8B5LXnJ8YwJZ9U"
-                    width="100%"
-                    height="152"
-                    frameborder="0"
-                    allowfullscreen=""
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                    loading="lazy">
-                </iframe>
-
-            </div>
-
-        </section>
-
-
-        <!-- ===============================
-             SURAT
-        =============================== -->
-
-        <section class="bagian surat-section">
-
-            <p class="section-label">
-                FINAL MESSAGE
-            </p>
-
-            <h2>
-                💌 SURAT
-            </h2>
-
-            <div class="surat">
-
-                <p>
-                    Ni Hao...
-                </p>
-
-                <p>
-                    Di hari spesial ini, saya inces
-                    krakatau cuma mau bilang:
-                    terima kasih sudah ada di dunia ini.
-                </p>
-
-                <p>
-                    Terima kasih sudah menjadi dirimu
-                    sendiri. Semoga perjalananmu ke
-                    depan dipenuhi banyak hal baik,
-                    orang-orang baik, dan alasan untuk
-                    terus tersenyum.
-                </p>
-
-                <p>
-                    Semoga semua impianmu perlahan
-                    menemukan jalannya untuk menjadi
-                    nyata.
-                </p>
-
-                <p>
-                    Selamat ulang tahun,
-                    wahai ISTRI JHOPE. 🐿💜
-                </p>
-
-                <p class="signature">
-                    — Incess Krakatau
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- ===============================
-             NEXT
-        =============================== -->
-
-        <section class="next-section">
-
-            <p>
-                THE STORY ISN'T OVER YET...
-            </p>
-
-            <button
-                id="tombol-next"
-                class="tombol-besar"
+            <section
+                class="bagian album-section"
             >
-                NEXT ➜
-            </button>
 
-        </section>
+                <p class="section-label">
+                    MEMORY ARCHIVE
+                </p>
+
+                <h2>
+                    📸 ALBUM
+                </h2>
+
+                <div class="album-foto">
 
 
-        <footer>
+                    <div class="foto-item">
+                        <img
+                            src="IMG-20260914-WA0108.jpg"
+                            alt="Memory 1"
+                        >
+                    </div>
 
-            <p>
-                🐿 Made for the istri jhope
-            </p>
 
-        </footer>
+                    <div class="foto-item">
+                        <img
+                            src="IMG-20260914-WA0109.jpg"
+                            alt="Memory 2"
+                        >
+                    </div>
 
-    </main>
 
-</section>           
- 
+                    <div class="foto-item">
+                        <img
+                            src="IMG-20260914-WA0111.jpg"
+                            alt="Memory 3"
+                        >
+                    </div>
+
+
+                    <div class="foto-item">
+                        <img
+                            src="IMG-20260914-WA0118.jpg"
+                            alt="Memory 4"
+                        >
+                    </div>
+
+
+                    <div class="foto-item">
+                        <img
+                            src="IMG-20260914-WA0110.jpg"
+                            alt="Memory 5"
+                        >
+                    </div>
+
+
+                    <div class="foto-item">
+                        <img
+                            src="IMG-20260914-WA0117.jpg"
+                            alt="Memory 6"
+                        >
+                    </div>
+
+
+                    <div class="foto-item">
+                        <img
+                            src="IMG-20260914-WA0107.jpg"
+                            alt="Memory 7"
+                        >
+                    </div>
+
+
+                    <div class="foto-item">
+                        <img
+                            src="IMG-20260914-WA0113.jpg"
+                            alt="Memory 8"
+                        >
+                    </div>
+
+
+                    <div class="foto-item">
+                        <img
+                            src="IMG-20260912-WA0009(1).jpg"
+                            alt="Memory 9"
+                        >
+                    </div>
+
+
+                    <div class="foto-item">
+                        <img
+                            src="IMG-20260914-WA0115.jpg"
+                            alt="Memory 10"
+                        >
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ===============================
+                 SPOTIFY
+            =============================== -->
+
+            <section
+                class="bagian spotify-section"
+            >
+
+                <p class="section-label">
+                    SOUNDTRACK
+                </p>
+
+                <h2>
+                    🎵 SPOTIFY
+                </h2>
+
+                <div class="spotify-box">
+
+                    <iframe
+                        src="https://open.spotify.com/embed/track/54ZIksXv8B5LXnJ8YwJZ9U"
+                        width="100%"
+                        height="152"
+                        frameborder="0"
+                        allowfullscreen=""
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        loading="lazy">
+                    </iframe>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ===============================
+                 SURAT
+            =============================== -->
+
+            <section
+                class="bagian surat-section"
+            >
+
+                <p class="section-label">
+                    FINAL MESSAGE
+                </p>
+
+                <h2>
+                    💌 SURAT
+                </h2>
+
+                <div class="surat">
+
+                    <p>
+                        Ni Hao...
+                    </p>
+
+                    <p>
+                        Di hari spesial ini, saya
+                        Incess Krakatau cuma mau
+                        bilang: terima kasih sudah
+                        ada di dunia ini.
+                    </p>
+
+                    <p>
+                        Terima kasih sudah menjadi
+                        dirimu sendiri. Semoga
+                        perjalananmu ke depan
+                        dipenuhi banyak hal baik,
+                        orang-orang baik, dan alasan
+                        untuk terus tersenyum.
+                    </p>
+
+                    <p>
+                        Semoga semua impianmu
+                        perlahan menemukan jalannya
+                        untuk menjadi nyata.
+                    </p>
+
+                    <p>
+                        Selamat ulang tahun,
+                        wahai ISTRI JHOPE. 🐿️🤎
+                    </p>
+
+                    <p class="signature">
+                        — Incess Krakatau
+                    </p>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ===============================
+                 NEXT
+            =============================== -->
+
+            <section class="next-section">
+
+                <p>
+                    THE STORY ISN'T OVER YET...
+                </p>
+
+                <button
+                    id="tombol-next"
+                    class="tombol-besar"
+                >
+                    NEXT ➜
+                </button>
+
+            </section>
+
+
+
+            <footer>
+
+                <p>
+                    🐿️ Made for the istri J-Hope
+                </p>
+
+            </footer>
+
+
+        </main>
+
+    </section>
+
 
 
     <!-- ==================================================
@@ -499,4 +617,5 @@
     <script src="Jhope.js"></script>
 
 </body>
-  </html>
+
+</html>
