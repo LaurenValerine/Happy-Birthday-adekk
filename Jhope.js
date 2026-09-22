@@ -165,7 +165,7 @@ function mulaiHitungMundur(id, mulai, selesai) {
 // =====================================================
 
 const tombolAmbilKue =
-    document.getElementById("tiup-lilin");
+    document.getElementById("ambil-kue");
 
 const gambarKue =
     document.getElementById("gambar-kue");
