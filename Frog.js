@@ -6,92 +6,83 @@
 // KONFIGURASI
 // =====================================================
 
-Const JAWABAN_SANDI = “Katak”;
-Const KLIK_ERROR = 3;
+const JAWABAN_SANDI = "Katak";
+const KLIK_ERROR = 3;
 
 // =====================================================
 // FUNGSI BANTU
 // =====================================================
 
-Function wait(ms) {
-Return new Promise(resolve => setTimeout(resolve, ms));
-}
+ function tampilkanLayar(id) {
 
-Function tampilkanLayar(id) {
+    document.querySelectorAll(".screen").forEach(function (layar) {
+        layar.classList.remove("active");
+        layar.classList.add("hidden");
+    });
 
-Document.querySelectorAll(“.screen”).forEach(screen => {  
-    Screen.classList.remove(“active”);                    
-    Screen.classList.add(“hidden”);  
-});  
+    const layar = document.getElementById(id);
 
-Const layar = document.getElementById(id);  
-
-If (layar) {  
-    Layar.classList.remove(“hidden”);  
-    Layar.classList.add(“active”);  
-}
+    if (layar) {
+        layar.classList.remove("hidden");
+        layar.classList.add("active");
+    } else {
+        console.error("Layar tidak ditemukan:", id);
+    }
 
 }
 
-// =====================================================
+ // =====================================================
 // 1. SANDI / TEKA-TEKI
 // =====================================================
 
-Const tombolSandi = document.getElementById(“kirim-sandi”);
-Const inputSandi = document.getElementById(“jawaban-sandi”);
-Const pesanSalah = document.getElementById(“sandi-salah”);
+const JAWABAN_SANDI = "katak";
 
-If (tombolSandi) {
+const tombolSandi = document.getElementById("kirim-sandi");
+const inputSandi = document.getElementById("jawaban-sandi");
+const pesanSalah = document.getElementById("sandi-salah");
 
-tombolSandi.addEventListener(“click”, () => {  
+if (tombolSandi && inputSandi) {
 
-    const jawab = inputSandi.value  
-        .trim();  
-        .toLowerCase();  
+    tombolSandi.addEventListener("click", function (event) {
+        event.preventDefault();
 
-    If (jawab === JAWABAN_SANDI) {  
+        const jawab = inputSandi.value.trim().toLowerCase();
 
-        // Sembunyikan pesan kesalahan  
-        pesanSalah.classList.add(“hidden”);  
+        if (jawab === JAWABAN_SANDI) {
 
-        // Lanjut ke countdown  
-        tampilkanLayar(“hitung-screen”);  
+            if (pesanSalah) {
+                pesanSalah.classList.add("hidden");
+            }
 
-        mulaiHitungMundur(  
-            “angka-hitung”,  
-            10,  
-            () => {  
-                tampilkanLayar(“kue-screen”);  
-            }  
-        );  
+            tampilkanLayar("hitung-screen");
 
-    } else {  
+            mulaiHitungMundur(
+                "angka-hitung",
+                10,
+                function () {
+                    tampilkanLayar("kue-screen");
+                }
+            );
 
-        // Jawaban salah  
-        pesanSalah.classList.remove(“hidden”);  
+        } else {
 
-        // Bersihkan input  
-        inputSandi.value = “”;  
+            if (pesanSalah) {
+                pesanSalah.classList.remove("hidden");
+                pesanSalah.textContent = "Katanya Ratu KATAK Masa Gatauu😝";
+            }
 
-        inputSandi.focus();  
+            inputSandi.value = "";
+            inputSandi.focus();
 
-    }  
+        }
+    });
 
-});
-
-}
-
-// Bisa menekan ENTER untuk mengirim jawaban
-
-If (inputSandi) {
-
-inputSandi.addEventListener(“keydown”, event => {  
-
-    if (event.key === “Enter”) {  
-        tombolSandi.click();  
-    }  
-
-});
+    inputSandi.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            tombolSandi.click();
+        }
+    });
 
 }
 
@@ -99,31 +90,31 @@ inputSandi.addEventListener(“keydown”, event => {
 // 2. COUNTDOWN UMUM
 // =====================================================
 
-Function mulaiHitungMundur(id, mulai, selesai) {
+function mulaiHitungMundur(id, mulai, selesai) {
 
 Let angka = mulai;  
 
-Const element = document.getElementById(id);  
+const element = document.getElementById(id);  
 
-If (!element) return;  
+if (!element) return;  
 
 Element.textContent = angka;  
 
-Const timer = setInterval(() => {  
+const timer = setInterval(() => {  
 
     Angka--;  
 
     Element.textContent = angka;  
 
     // Efek kecil setiap angka berubah  
-    Element.classList.remove(“pulse”);  
+    Element.classList.remove("pulse");  
 
     Void element.offsetWidth;  
 
-    Element.classList.add(“pulse”);  
+    Element.classList.add("pulse");  
 
 
-    If (angka <= 0) {  
+    if (angka <= 0) {  
 
         clearInterval(timer);  
 
@@ -141,57 +132,57 @@ Const timer = setInterval(() => {
 // 3. KUE — TIUP LILIN
 // =====================================================
 
-Const tombolTiup = document.getElementById(“tiup-lilin”);
-Const gambarKue = document.getElementById(“gambar-kue”);
+const tombolTiup = document.getElementById("tiup-lili");
+const gambarKue = document.getElementById("gambar-kue");
 
-If (tombolTiup) {
+if (tombolTiup) {
 
-tombolTiup.addEventListener(“click”, async () => {  
+tombolTiup.addEventListener("click", async () => {  
 
     tombolTiup.disabled = true;  
 
     // Efek kue  
-    If (gambarKue) {  
+    if (gambarKue) {  
 
         gambarKue.style.transition =  
-            “all 0.6s ease”;  
+            "all 0.6s ease";  
 
         gambarKue.style.transform =  
-            “scale(1.1)”;  
+            "scale(1.1)";  
 
         gambarKue.style.filter =  
-            “brightness(1.4)”;  
+            "brightness(1.4)";  
 
     }  
 
-    Await wait(600);  
+    await wait(600);  
 
 
     // Kembalikan tampilan  
-    If (gambarKue) {  
+    if (gambarKue) {  
 
         gambarKue.style.transform =  
-            “scale(1)”;  
+            "scale(1)";  
 
         gambarKue.style.filter =  
-            “none”;  
+            "none";  
 
     }  
 
 
-    Await wait(300);  
+    await wait(300);  
 
 
     // Masuk countdown terakhir  
-    tampilkanLayar(“final-hitung-screen”);  
+    tampilkanLayar("final-hitung-screen");  
 
 
     mulaiHitungMundur(  
-        “angka-final”,  
+        "angka-final",  
         3,  
         () => {  
 
-            tampilkanLayar(“hujan-screen”);  
+            tampilkanLayar("hujan-screen");  
 
             mulaiHujanTeks();  
 
@@ -208,20 +199,20 @@ tombolTiup.addEventListener(“click”, async () => {
 
 Async function mulaiHujanTeks() {
 
-Const wadah =  
-    Document.getElementById(“wadah-hujan”);  
+const wadah =  
+    document.getElementById("wadah-hujan");  
 
-Const hati =  
-    Document.getElementById(“bentuk-hati”);  
+const hati =  
+    document.getElementById("bentuk-hati");  
 
-Const tombol =  
-    Document.getElementById(“lanjut-kado”);  
-
-
-If (!wadah) return;  
+const tombol =  
+    document.getElementById("lanjut-kado");  
 
 
-Wadah.innerHTML = “”;  
+if (!wadah) return;  
+
+
+Wadah.innerHTML = "";  
 
 
 
@@ -229,29 +220,29 @@ Wadah.innerHTML = “”;
     // HUJAN TEKS
     // -----------------------------------------------
 
-    Const jumlah = 70;
+    const jumlah = 70;
 
     For (let i = 0; i < jumlah; i++) {
 
         setTimeout(() => {
 
             const teks =
-                document.createElement(“span”);
+                document.createElement("span");
 
             teks.className =
                 “teks-jatuh”;
 
-            Teks.textContent =
-                “HAPPY BIRTHDAY”;
+            teks.textContent =
+                "HAPPY BIRTHDAY";
 
-            Teks.style.left =
-                Math.random() * 100 + “%”;
+            teks.style.left =
+                Math.random() * 100 + "%";
 
-            Teks.style.animationDelay =
-                Math.random() * 0.8 + “s”;
+            teks.style.animationDelay =
+                Math.random() * 0.8 + "s";
 
-            Teks.style.fontSize =
-                (10 + Math.random() * 12) + “px”;
+            teks.style.fontSize =
+                (10 + Math.random() * 12) + "px";
 
             Wadah.appendChild(teks);
 
@@ -264,7 +255,7 @@ Wadah.innerHTML = “”;
     }
 
     // Tunggu hujan
-    Await wait(4000);
+    await wait(4000);
 
 
     // -----------------------------------------------
@@ -272,15 +263,15 @@ Wadah.innerHTML = “”;
     // -----------------------------------------------
   
 
-If (wadah) {  
+if (wadah) {  
 
-    Wadah.innerHTML = “”;  
+    Wadah.innerHTML = "";  
 
-    Const jumlahLove = 160;  
+    const jumlahLove = 160;  
 
     For (let i = 0; i < jumlahLove; i++) {  
 
-        Const t =  
+        const t =  
             (Math.PI * 2 * i) / jumlahLove;  
 
         /*  
@@ -293,43 +284,43 @@ If (wadah) {
          *     - cos(4t)  
          */  
 
-        Const x =  
+        const x =  
             16 *  
             Math.pow(Math.sin(t), 3);  
 
-        Const y =  
+        const y =  
             13 * Math.cos(t)  
             - 5 * Math.cos(2 * t)  
             - 2 * Math.cos(3 * t)  
             - Math.cos(4 * t);  
 
 
-        Const teks =  
-            Document.createElement(“span”);  
+        const teks =  
+            document.createElement("span");  
 
-        Teks.className =  
-            “love-text”;  
+        teks.className =  
+            "love-text";  
 
-        Teks.textContent =  
-            “HAPPY BIRTHDAY”;  
+        teks.textContent =  
+            "HAPPY BIRTHDAY";  
 
 
-        Const posX =  
+        const posX =  
             50 + x * 2.3;  
 
-        Const posY =  
+        const posY =  
             45 – y * 2.3;  
 
 
-        Teks.style.left =  
-            posX + “%”;  
+        teks.style.left =  
+            posX + "%";  
 
         teks.style.top =  
-            posY + “%”;  
+            posY + "%";  
 
 
         teks.style.animationDelay =  
-            (i * 0.008) + “s”;  
+            (i * 0.008) + "s";  
 
 
         Wadah.appendChild(teks);  
@@ -343,37 +334,37 @@ If (wadah) {
 // TUNGGU LOVE TERBENTUK  
 // -----------------------------------------------  
 
-Await wait(2500);  
+await wait(2500);  
 
 
 // -----------------------------------------------  
 // TAMPILKAN TULISAN TENGAH  
 // -----------------------------------------------  
 
-If (hati) {  
+if (hati) {  
 
     Hati.textContent =  
-        “HAPPY BIRTHDAY”;  
+        "HAPPY BIRTHDAY";  
 
-    Hati.classList.remove(“hidden”);  
+    Hati.classList.remove("hidden");  
 
-    Hati.classList.add(“muncul”);  
+    Hati.classList.add("muncul");  
 
 }  
 
 
-Await wait(1500);  
+await wait(1500);  
 
 
 // -----------------------------------------------  
 // LANJUT KE KADO  
 // -----------------------------------------------  
 
-If (tombol) {  
+if (tombol) {  
 
-    Tombol.classList.remove(“hidden”);  
+    Tombol.classList.remove("hidden");  
 
-    Tombol.classList.add(“muncul”);  
+    Tombol.classList.add("muncul");  
 
 }
 
@@ -383,14 +374,14 @@ If (tombol) {
 // 5. LANJUT KE KADO
 // =====================================================
 
-Const tombolKado =
-Document.getElementById(“lanjut-kado”);
+const tombolKado =
+document.getElementById("lanjut-kado");
 
-If (tombolKado) {
+uf (tombolKado) {
 
-tombolKado.addEventListener(“click”, () => {  
+tombolKado.addEventListener("click", () => {  
 
-    tampilkanLayar(“kado-screen”);  
+    tampilkanLayar("kado-screen");  
 
 });
 
@@ -400,30 +391,30 @@ tombolKado.addEventListener(“click”, () => {
 // 6. KADO — BUKA
 // =====================================================
 
-Const gambarKado =
-Document.getElementById(“gambar-kado”);
+const gambarKado =
+document.getElementById(“gambar-kado”);
 
 If (gambarKado) {
 
 gambarKado.addEventListener(  
-    “click”,  
+    "click",  
     Async function () {  
 
         This.style.transition =  
-            “all 0.8s cubic-bezier(.68,-0.55,.27,1.55)”;  
+            "all 0.8s cubic-bezier(.68,-0.55,.27,1.55)";  
 
         This.style.transform =  
-            “scale(1.3) rotate(15deg)”;  
+            "scale(1.3) rotate(15deg)";  
 
 
-        Await wait(250);  
+        await wait(250);  
 
 
-        This.style.transform =  
-            “scale(0) rotate(360deg)”;  
+        this.style.transform =  
+            "scale(0) rotate(360deg)";  
 
-        This.style.opacity =  
-            “0”;  
+        this.style.opacity =  
+            "0";  
 
 
         Await wait(800);  
@@ -433,7 +424,7 @@ gambarKado.addEventListener(
         sudahKlik = 0;  
 
         const counter =  
-            document.getElementById(“hitungan-klik”);  
+            document.getElementById("hitungan-klik");  
 
         if (counter) {  
             counter.textContent =  
@@ -457,16 +448,16 @@ gambarKado.addEventListener(
 // 7. ERROR SYSTEM
 // =====================================================
 
-Let sudahKlik = 0;
+let sudahKlik = 0;
 
-Const kotakError =
-Document.getElementById(“kotak-error”);
+const kotakError =
+document.getElementById("kotak-error");
 
-Const teksError =
-Document.getElementById(“teks-error”);
+const teksError =
+document.getElementById("teks-error");
 
-Const hitunganKlik =
-Document.getElementById(“hitungan-klik”);
+const hitunganKlik =
+document.getElementById("hitungan-klik");
 
 Const pesanError = [
 
