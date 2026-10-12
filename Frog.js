@@ -237,48 +237,45 @@ async function mulaiHujanTeks() {
     // HUJAN TEKS
     // -----------------------------------------------
 
-    const jumlah = 70;
+    
+#wadah-hujan {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 9999;
+}
 
-    for (let i = 0; i < jumlah; i++) {
+.teks-jatuh {
+    position: absolute;
+    top: -30px;
+    white-space: nowrap;
+    color: #39ff88;
+    font-weight: bold;
+    text-shadow: 0 0 8px #00ff66;
+    animation: hujanTurun 4s linear forwards;
+}
 
-        setTimeout(() => {
-
-            const teks =
-                document.createElement("span");
-
-            teks.className =
-                "teks-jatuh";
-
-            teks.textContent =
-                "HAPPY BIRTHDAY";
-
-
-            teks.style.left =
-                Math.random() * 100 + "%";
-
-
-            teks.style.animationDelay =
-                Math.random() * 0.8 + "s";
-
-
-            teks.style.fontSize =
-                (10 + Math.random() * 12) + "px";
-
-
-            wadah.appendChild(teks);
-
-
-            setTimeout(() => {
-                teks.remove();
-            }, 4000);
-
-        }, i * 50);
-
+@keyframes hujanTurun {
+    0% {
+        transform: translateY(0);
+        opacity: 0;
     }
 
+    10% {
+        opacity: 1;
+    }
 
-    // Tunggu hujan
-    await wait(4000);
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(105vh);
+        opacity: 0;
+    }
+}
+
 
 
     // -----------------------------------------------
