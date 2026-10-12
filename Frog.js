@@ -1,637 +1,558 @@
+
+"use strict";
+
 // =====================================================
 // 🐸 FROG BIRTHDAY EXPERIENCE
 // =====================================================
 
-// =====================================================
-// KONFIGURASI
+// 1. KONFIGURASI
 // =====================================================
 
-const JAWABAN_SANDI = "Katak";
+const JAWABAN_SANDI = "katak";
 const KLIK_ERROR = 3;
+const LINK_NEXT = "https://htmlku.my.id/25M56";
 
 // =====================================================
-// FUNGSI BANTU
+// 2. FUNGSI BANTU
 // =====================================================
 
- function tampilkanLayar(id) {
+function wait(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
-    document.querySelectorAll(".screen").forEach(function (layar) {
+function ambilElemen(id) {
+    return document.getElementById(id);
+}
+
+function tampilkanLayar(id) {
+    document.querySelectorAll(".screen").forEach(layar => {
         layar.classList.remove("active");
         layar.classList.add("hidden");
     });
 
-    const layar = document.getElementById(id);
+    const layarTujuan = ambilElemen(id);
 
-    if (layar) {
-        layar.classList.remove("hidden");
-        layar.classList.add("active");
-    } else {
+    if (!layarTujuan) {
         console.error("Layar tidak ditemukan:", id);
+        return false;
     }
 
+    layarTujuan.classList.remove("hidden");
+    layarTujuan.classList.add("active");
+
+    return true;
 }
 
- // =====================================================
-// 1. SANDI / TEKA-TEKI
+// =====================================================
+// 3. COUNTDOWN UMUM
 // =====================================================
 
-const JAWABAN_SANDI = "katak";
+let timerCountdown = null;
 
-const tombolSandi = document.getElementById("kirim-sandi");
-const inputSandi = document.getElementById("jawaban-sandi");
-const pesanSalah = document.getElementById("sandi-salah");
+function mulaiHitungMundur(id, mulai, selesai) {
+    const elemenAngka = ambilElemen(id);
 
-if (tombolSandi && inputSandi) {
+    if (!elemenAngka) {
+        console.error("Elemen countdown tidak ditemukan:", id);
+        return;
+    }
 
-    tombolSandi.addEventListener("click", function (event) {
-        event.preventDefault();
+    // Mencegah countdown lama berjalan bersamaan.
+    if (timerCountdown !== null) {
+        clearInterval(timerCountdown);
+        timerCountdown = null;
+    }
 
-        const jawab = inputSandi.value.trim().toLowerCase();
+    let angka = mulai;
+    elemenAngka.textContent = angka;
 
-        if (jawab === JAWABAN_SANDI) {
+    elemenAngka.classList.remove("pulse");
+    void elemenAngka.offsetWidth;
+    elemenAngka.classList.add("pulse");
+
+    timerCountdown = setInterval(() => {
+        angka--;
+        elemenAngka.textContent = angka;
+
+        elemenAngka.classList.remove("pulse");
+        void elemenAngka.offsetWidth;
+        elemenAngka.classList.add("pulse");
+
+        if (angka <= 0) {
+            clearInterval(timerCountdown);
+            timerCountdown = null;
+
+            setTimeout(() => {
+                selesai();
+            }, 500);
+        }
+    }, 1000);
+}
+
+// =====================================================
+// 4. SANDI / TEKA-TEKI
+// =====================================================
+
+function pasangSistemSandi() {
+    const tombolSandi = ambilElemen("kirim-sandi");
+    const inputSandi = ambilElemen("jawaban-sandi");
+    const pesanSalah = ambilElemen("sandi-salah");
+
+    if (!tombolSandi || !inputSandi) {
+        console.error(
+            "Elemen sandi tidak ditemukan. Periksa ID HTML."
+        );
+        return;
+    }
+
+    let sandiBerhasil = false;
+
+    function periksaSandi(event) {
+        if (event) {
+            event.preventDefault();
+        }
+
+        // Mencegah countdown dimulai berkali-kali.
+        if (sandiBerhasil) return;
+
+        const jawaban = inputSandi.value
+            .trim()
+            .toLowerCase();
+
+        if (jawaban === JAWABAN_SANDI) {
+            sandiBerhasil = true;
+            tombolSandi.disabled = true;
 
             if (pesanSalah) {
+                pesanSalah.textContent = "";
                 pesanSalah.classList.add("hidden");
             }
 
-            tampilkanLayar("hitung-screen");
+            inputSandi.disabled = true;
+
+            const berhasil = tampilkanLayar("hitung-screen");
+
+            if (!berhasil) {
+                sandiBerhasil = false;
+                tombolSandi.disabled = false;
+                inputSandi.disabled = false;
+                return;
+            }
 
             mulaiHitungMundur(
                 "angka-hitung",
                 10,
-                function () {
+                () => {
                     tampilkanLayar("kue-screen");
                 }
             );
 
         } else {
-
             if (pesanSalah) {
+                pesanSalah.textContent =
+                    "Katanya Ratu KATAK, masa gatauu 😝";
+
                 pesanSalah.classList.remove("hidden");
-                pesanSalah.textContent = "Katanya Ratu KATAK Masa Gatauu😝";
             }
 
             inputSandi.value = "";
             inputSandi.focus();
-
         }
-    });
+    }
 
-    inputSandi.addEventListener("keydown", function (event) {
+    tombolSandi.addEventListener("click", periksaSandi);
+
+    inputSandi.addEventListener("keydown", event => {
         if (event.key === "Enter") {
-            event.preventDefault();
-            tombolSandi.click();
+            periksaSandi(event);
         }
     });
-
 }
 
 // =====================================================
-// 2. COUNTDOWN UMUM
+// 5. KUE / TIUP LILIN
 // =====================================================
 
-function mulaiHitungMundur(id, mulai, selesai) {
+function pasangTombolTiup() {
+    const tombolTiup = ambilElemen("tiup-lilin");
+    const gambarKue = ambilElemen("gambar-kue");
 
-Let angka = mulai;  
+    if (!tombolTiup) {
+        console.warn("Tombol tiup-lilin tidak ditemukan.");
+        return;
+    }
 
-const element = document.getElementById(id);  
+    let sedangMemproses = false;
 
-if (!element) return;  
+    tombolTiup.addEventListener("click", async () => {
+        if (sedangMemproses) return;
+        sedangMemproses = true;
 
-Element.textContent = angka;  
+        tombolTiup.disabled = true;
 
-const timer = setInterval(() => {  
+        if (gambarKue) {
+            gambarKue.style.transition = "all 0.6s ease";
+            gambarKue.style.transform = "scale(1.1)";
+            gambarKue.style.filter = "brightness(1.4)";
+        }
 
-    Angka--;  
+        await wait(600);
 
-    Element.textContent = angka;  
+        if (gambarKue) {
+            gambarKue.style.transform = "scale(1)";
+            gambarKue.style.filter = "none";
+        }
 
-    // Efek kecil setiap angka berubah  
-    Element.classList.remove("pulse");  
+        await wait(300);
 
-    Void element.offsetWidth;  
+        const berhasil = tampilkanLayar("final-hitung-screen");
 
-    Element.classList.add("pulse");  
+        if (!berhasil) {
+            sedangMemproses = false;
+            tombolTiup.disabled = false;
+            return;
+        }
 
+        mulaiHitungMundur("angka-final", 3, () => {
+            const pindah = tampilkanLayar("hujan-screen");
 
-    if (angka <= 0) {  
-
-        clearInterval(timer);  
-
-        setTimeout(() => {  
-            selesai();  
-        }, 500);  
-
-    }  
-
-}, 1000);
-
+            if (pindah) {
+                mulaiHujanTeks();
+            }
+        });
+    });
 }
 
 // =====================================================
-// 3. KUE — TIUP LILIN
+// 6. HUJAN TEKS HAPPY BIRTHDAY
 // =====================================================
 
-const tombolTiup = document.getElementById("tiup-lili");
-const gambarKue = document.getElementById("gambar-kue");
+async function mulaiHujanTeks() {
+    const wadah = ambilElemen("wadah-hujan");
+    const hati = ambilElemen("bentuk-hati");
+    const tombolKado = ambilElemen("lanjut-kado");
 
-if (tombolTiup) {
+    if (!wadah) {
+        console.error("Elemen wadah-hujan tidak ditemukan.");
+        return;
+    }
 
-tombolTiup.addEventListener("click", async () => {  
+    // Reset tampilan agar animasi tidak menumpuk.
+    wadah.innerHTML = "";
 
-    tombolTiup.disabled = true;  
+    if (hati) {
+        hati.textContent = "";
+        hati.classList.remove("muncul");
+        hati.classList.add("hidden");
+    }
 
-    // Efek kue  
-    if (gambarKue) {  
+    if (tombolKado) {
+        tombolKado.classList.remove("muncul");
+        tombolKado.classList.add("hidden");
+    }
 
-        gambarKue.style.transition =  
-            "all 0.6s ease";  
+    // -------------------------------------------------
+    // A. HUJAN TEKS
+    // -------------------------------------------------
 
-        gambarKue.style.transform =  
-            "scale(1.1)";  
+    const jumlahHujan = 70;
 
-        gambarKue.style.filter =  
-            "brightness(1.4)";  
-
-    }  
-
-    await wait(600);  
-
-
-    // Kembalikan tampilan  
-    if (gambarKue) {  
-
-        gambarKue.style.transform =  
-            "scale(1)";  
-
-        gambarKue.style.filter =  
-            "none";  
-
-    }  
-
-
-    await wait(300);  
-
-
-    // Masuk countdown terakhir  
-    tampilkanLayar("final-hitung-screen");  
-
-
-    mulaiHitungMundur(  
-        "angka-final",  
-        3,  
-        () => {  
-
-            tampilkanLayar("hujan-screen");  
-
-            mulaiHujanTeks();  
-
-        }  
-    );  
-
-});
-
-}
-
-// =====================================================
-// 4. HUJAN HAPPY BIRTHDAY → MEMBENTUK LOVE
-// =====================================================
-
-Async function mulaiHujanTeks() {
-
-const wadah =  
-    document.getElementById("wadah-hujan");  
-
-const hati =  
-    document.getElementById("bentuk-hati");  
-
-const tombol =  
-    document.getElementById("lanjut-kado");  
-
-
-if (!wadah) return;  
-
-
-Wadah.innerHTML = "";  
-
-
-
-    // -----------------------------------------------
-    // HUJAN TEKS
-    // -----------------------------------------------
-
-    const jumlah = 70;
-
-    For (let i = 0; i < jumlah; i++) {
-
+    for (let i = 0; i < jumlahHujan; i++) {
         setTimeout(() => {
+            const teks = document.createElement("span");
 
-            const teks =
-                document.createElement("span");
+            teks.className = "teks-jatuh";
+            teks.textContent = "HAPPY BIRTHDAY";
 
-            teks.className =
-                “teks-jatuh”;
-
-            teks.textContent =
-                "HAPPY BIRTHDAY";
-
-            teks.style.left =
-                Math.random() * 100 + "%";
-
+            teks.style.left = Math.random() * 100 + "%";
             teks.style.animationDelay =
                 Math.random() * 0.8 + "s";
 
             teks.style.fontSize =
                 (10 + Math.random() * 12) + "px";
 
-            Wadah.appendChild(teks);
+            wadah.appendChild(teks);
 
             setTimeout(() => {
                 teks.remove();
-            }, 4000);
-
+            }, 4500);
         }, i * 50);
-
     }
 
-    // Tunggu hujan
     await wait(4000);
 
+    // -------------------------------------------------
+    // B. MEMBENTUK HATI DARI TEKS
+    // -------------------------------------------------
 
-    // -----------------------------------------------
-    // BENTUK LOVE
-    // -----------------------------------------------
-  
+    wadah.innerHTML = "";
 
-if (wadah) {  
+    const jumlahLove = 160;
 
-    Wadah.innerHTML = "";  
+    for (let i = 0; i < jumlahLove; i++) {
+        const t = (Math.PI * 2 * i) / jumlahLove;
 
-    const jumlahLove = 160;  
+        // Rumus parametrik bentuk hati.
+        const x = 16 * Math.pow(Math.sin(t), 3);
 
-    For (let i = 0; i < jumlahLove; i++) {  
+        const y =
+            13 * Math.cos(t)
+            - 5 * Math.cos(2 * t)
+            - 2 * Math.cos(3 * t)
+            - Math.cos(4 * t);
 
-        const t =  
-            (Math.PI * 2 * i) / jumlahLove;  
+        const teks = document.createElement("span");
 
-        /*  
-         * Rumus parametrik LOVE  
-         *  
-         * x = 16 sin³(t)  
-         * y = 13 cos(t)  
-         *     - 5 cos(2t)  
-         *     - 2 cos(3t)  
-         *     - cos(4t)  
-         */  
+        teks.className = "love-text";
+        teks.textContent = "HAPPY BIRTHDAY";
 
-        const x =  
-            16 *  
-            Math.pow(Math.sin(t), 3);  
+        const posX = 50 + x * 2.3;
+        const posY = 45 - y * 2.3;
 
-        const y =  
-            13 * Math.cos(t)  
-            - 5 * Math.cos(2 * t)  
-            - 2 * Math.cos(3 * t)  
-            - Math.cos(4 * t);  
+        teks.style.left = posX + "%";
+        teks.style.top = posY + "%";
+        teks.style.animationDelay = (i * 0.008) + "s";
 
+        wadah.appendChild(teks);
+    }
 
-        const teks =  
-            document.createElement("span");  
+    await wait(2500);
 
-        teks.className =  
-            "love-text";  
+    // -------------------------------------------------
+    // C. TULISAN TENGAH
+    // -------------------------------------------------
 
-        teks.textContent =  
-            "HAPPY BIRTHDAY";  
+    if (hati) {
+        hati.textContent = "HAPPY BIRTHDAY";
+        hati.classList.remove("hidden");
+        hati.classList.add("muncul");
+    }
 
+    await wait(1500);
 
-        const posX =  
-            50 + x * 2.3;  
+    // -------------------------------------------------
+    // D. TOMBOL MENUJU KADO
+    // -------------------------------------------------
 
-        const posY =  
-            45 – y * 2.3;  
-
-
-        teks.style.left =  
-            posX + "%";  
-
-        teks.style.top =  
-            posY + "%";  
-
-
-        teks.style.animationDelay =  
-            (i * 0.008) + "s";  
-
-
-        Wadah.appendChild(teks);  
-
-    }  
-
-}  
-
-
-// -----------------------------------------------  
-// TUNGGU LOVE TERBENTUK  
-// -----------------------------------------------  
-
-await wait(2500);  
-
-
-// -----------------------------------------------  
-// TAMPILKAN TULISAN TENGAH  
-// -----------------------------------------------  
-
-if (hati) {  
-
-    Hati.textContent =  
-        "HAPPY BIRTHDAY";  
-
-    Hati.classList.remove("hidden");  
-
-    Hati.classList.add("muncul");  
-
-}  
-
-
-await wait(1500);  
-
-
-// -----------------------------------------------  
-// LANJUT KE KADO  
-// -----------------------------------------------  
-
-if (tombol) {  
-
-    Tombol.classList.remove("hidden");  
-
-    Tombol.classList.add("muncul");  
-
-}
-
+    if (tombolKado) {
+        tombolKado.classList.remove("hidden");
+        tombolKado.classList.add("muncul");
+    }
 }
 
 // =====================================================
-// 5. LANJUT KE KADO
+// 7. TOMBOL LANJUT KE KADO
 // =====================================================
 
-const tombolKado =
-document.getElementById("lanjut-kado");
+function pasangTombolKado() {
+    const tombolKado = ambilElemen("lanjut-kado");
 
-uf (tombolKado) {
+    if (!tombolKado) {
+        console.warn("Tombol lanjut-kado tidak ditemukan.");
+        return;
+    }
 
-tombolKado.addEventListener("click", () => {  
-
-    tampilkanLayar("kado-screen");  
-
-});
-
+    tombolKado.addEventListener("click", () => {
+        tampilkanLayar("kado-screen");
+    });
 }
 
 // =====================================================
-// 6. KADO — BUKA
+// 8. ANIMASI MEMBUKA KADO
 // =====================================================
 
-const gambarKado =
-document.getElementById(“gambar-kado”);
+function pasangAnimasiKado() {
+    const gambarKado = ambilElemen("gambar-kado");
 
-If (gambarKado) {
+    if (!gambarKado) {
+        console.warn("Elemen gambar-kado tidak ditemukan.");
+        return;
+    }
 
-gambarKado.addEventListener(  
-    "click",  
-    Async function () {  
+    let kadoDibuka = false;
 
-        This.style.transition =  
-            "all 0.8s cubic-bezier(.68,-0.55,.27,1.55)";  
+    gambarKado.addEventListener("click", async function () {
+        if (kadoDibuka) return;
+        kadoDibuka = true;
 
-        This.style.transform =  
-            "scale(1.3) rotate(15deg)";  
+        this.style.transition =
+            "all 0.8s cubic-bezier(.68,-0.55,.27,1.55)";
 
+        this.style.transform = "scale(1.3) rotate(15deg)";
 
-        await wait(250);  
+        await wait(250);
 
+        this.style.transform = "scale(0) rotate(360deg)";
+        this.style.opacity = "0";
 
-        this.style.transform =  
-            "scale(0) rotate(360deg)";  
+        await wait(800);
 
-        this.style.opacity =  
-            "0";  
+        resetErrorScreen();
 
+        const berhasil = tampilkanLayar("error-screen");
 
-        Await wait(800);  
-
-
-        // Reset click error  
-        sudahKlik = 0;  
-
-        const counter =  
-            document.getElementById("hitungan-klik");  
-
-        if (counter) {  
-            counter.textContent =  
-                `0/${KLIK_ERROR}`;  
-        }  
-
-
-        // Masuk ERROR  
-        tampilkanLayar(“error-screen”);  
-
-
-        // Reset tampilan error  
-        resetErrorScreen();  
-
-    }  
-);
-
+        if (!berhasil) {
+            kadoDibuka = false;
+            this.style.transform = "scale(1)";
+            this.style.opacity = "1";
+        }
+    });
 }
 
 // =====================================================
-// 7. ERROR SYSTEM
+// 9. SISTEM ERROR PALSU
 // =====================================================
 
 let sudahKlik = 0;
+let errorSedangDiproses = false;
 
-const kotakError =
-document.getElementById("kotak-error");
-
-const teksError =
-document.getElementById("teks-error");
-
-const hitunganKlik =
-document.getElementById("hitungan-klik");
-
-Const pesanError = [
-
-“Klik untuk memperbaiki...”,  
-
-“ERROR masih terdeteksi. Coba lagi.”,  
-
-“Sistem semakin kacau. Klik sekali lagi.”,  
-
-“SYSTEM OVERRIDE...”
-
+const pesanError = [
+    "Klik untuk memperbaiki...",
+    "ERROR masih terdeteksi. Coba lagi.",
+    "Sistem semakin kacau. Klik sekali lagi.",
+    "SYSTEM OVERRIDE..."
 ];
 
-If (kotakError) {
+async function prosesKlikError() {
+    const kotakError = ambilElemen("kotak-error");
+    const teksError = ambilElemen("teks-error");
+    const hitunganKlik = ambilElemen("hitungan-klik");
 
-kotakError.addEventListener(  
-    “click”,  
-    Async () => {  
+    if (!kotakError || errorSedangDiproses) return;
 
-        // Jangan tambah setelah selesai  
-        If (sudahKlik >= KLIK_ERROR) {  
-            Return;  
-        }  
+    if (sudahKlik >= KLIK_ERROR) return;
 
+    errorSedangDiproses = true;
+    sudahKlik++;
 
-        sudahKlik++;  
+    if (hitunganKlik) {
+        hitunganKlik.textContent =
+            `${sudahKlik}/${KLIK_ERROR}`;
+    }
 
+    if (teksError) {
+        teksError.textContent = pesanError[sudahKlik];
+    }
 
-        // Update counter  
-        If (hitunganKlik) {  
+    document.body.classList.add(
+        `error-level-${sudahKlik}`
+    );
 
-            hitunganKlik.textContent =  
-                `${sudahKlik}/${KLIK_ERROR}`;  
+    kotakError.classList.remove("shake");
+    void kotakError.offsetWidth;
+    kotakError.classList.add("shake");
 
-        }  
+    if (sudahKlik < KLIK_ERROR) {
+        await wait(250);
+        errorSedangDiproses = false;
+        return;
+    }
 
+    // ERROR BERHASIL DIPECAHKAN.
 
-        // Pesan berubah  
-        If (teksError) {  
+    kotakError.classList.add("beres");
 
-            teksError.textContent =  
-                pesanError[sudahKlik];  
+    if (teksError) {
+        teksError.textContent =
+            "Kejutan berhasil dibuka...";
+    }
 
-        }  
+    if (hitunganKlik) {
+        hitunganKlik.textContent = "ACCESS GRANTED";
+    }
 
+    await wait(1500);
 
-        // Efek semakin kacau  
-        Document.body.classList.add(  
-            `error-level-${sudahKlik}`  
-        );  
+    document.body.classList.remove(
+        "error-level-1",
+        "error-level-2",
+        "error-level-3"
+    );
 
+    tampilkanLayar("utama-screen");
 
-        kotakError.classList.remove(“shake”);  
+    errorSedangDiproses = false;
+}
 
-        void kotakError.offsetWidth;  
+function pasangSistemError() {
+    const kotakError = ambilElemen("kotak-error");
 
-        kotakError.classList.add(“shake”);  
+    if (!kotakError) {
+        console.warn("Elemen kotak-error tidak ditemukan.");
+        return;
+    }
 
+    kotakError.addEventListener("click", prosesKlikError);
+}
 
-        // Kalau belum 3 klik  
-        If (sudahKlik < KLIK_ERROR) {  
+function resetErrorScreen() {
+    sudahKlik = 0;
+    errorSedangDiproses = false;
 
-            Return;  
+    const teksError = ambilElemen("teks-error");
+    const hitunganKlik = ambilElemen("hitungan-klik");
+    const kotakError = ambilElemen("kotak-error");
 
-        }  
+    if (teksError) {
+        teksError.textContent = pesanError[0];
+    }
 
+    if (hitunganKlik) {
+        hitunganKlik.textContent = `0/${KLIK_ERROR}`;
+    }
 
-        // =================================================  
-        // ERROR BERHASIL DIPECAHKAN  
-        // =================================================  
+    if (kotakError) {
+        kotakError.classList.remove("beres", "shake");
+    }
 
-        kotakError.classList.add(“beres”);  
-
-
-        if (teksError) {  
-            teksError.textContent =  
-                “Kejutan berhasil dibuka...”;  
-        }  
-
-
-        If (hitunganKlik) {  
-            hitunganKlik.textContent =  
-                “ACCESS GRANTED”;  
-        }  
-
-
-        Await wait(1500);  
-
-
-        // Hapus efek error  
-        Document.body.classList.remove(  
-            “error-level-1”,  
-            “error-level-2”,  
-            “error-level-3”  
-        );  
-
-
-        // Masuk halaman utama  
-        tampilkanLayar(“utama-screen”);  
-
-    }  
-);
-
+    document.body.classList.remove(
+        "error-level-1",
+        "error-level-2",
+        "error-level-3"
+    );
 }
 
 // =====================================================
-// RESET ERROR
+// 10. TOMBOL NEXT
 // =====================================================
 
-Function resetErrorScreen() {
+function pasangTombolNext() {
+    const tombolNext = ambilElemen("tombol-next");
 
-sudahKlik = 0;  
+    if (!tombolNext) {
+        console.warn("Tombol tombol-next tidak ditemukan.");
+        return;
+    }
 
-
-if (teksError) {  
-
-    teksError.textContent =  
-        pesanError[0];  
-
-}  
-
-
-If (hitunganKlik) {  
-
-    hitunganKlik.textContent =  
-        `0/${KLIK_ERROR}`;  
-
-}  
-
-
-If (kotakError) {  
-
-    kotakError.classList.remove(  
-        “beres”,  
-        “shake”  
-    );  
-
-}  
-
-
-Document.body.classList.remove(  
-    “error-level-1”,  
-    “error-level-2”,  
-    “error-level-3”  
-);
-
+    tombolNext.addEventListener("click", () => {
+        window.location.href = LINK_NEXT;
+    });
 }
 
 // =====================================================
-// 8. TOMBOL NEXT
+// 11. MULAI WEBSITE
 // =====================================================
 
-Const tombolNext = document.getElementById(“tombol-next”);
+function mulaiWebsite() {
+    // Tampilkan layar sandi saat website dibuka.
+    tampilkanLayar("sandi-screen");
 
-If (tombolNext) {
-tombolNext.addEventListener(“click”, () => {
-window.location.href = "https://htmlku.my.id/25M56";
-});
+    // Pasang seluruh event.
+    pasangSistemSandi();
+    pasangTombolTiup();
+    pasangTombolKado();
+    pasangAnimasiKado();
+    pasangSistemError();
+    pasangTombolNext();
 }
 
-// =====================================================
-// 9. PROTEKSI AGAR SCREEN AWAL BENAR
-// =====================================================
-
-Document.addEventListener(
-“DOMContentLoaded”,
-() => {
-
-tampilkanLayar(“sandi-screen");  
-
+if (document.readyState === "loading") {
+    document.addEventListener(
+        "DOMContentLoaded",
+        mulaiWebsite,
+        { once: true }
+    );
+} else {
+    mulaiWebsite();
 }
-
-);
-
-
-
-
+ 
