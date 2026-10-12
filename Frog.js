@@ -642,7 +642,7 @@ const tombolNext = document.getElementById("tombol-next");
 
 if (tombolNext) {
     tombolNext.addEventListener("click", () => {
-        window.location.href = "https://htmlku.my.id/xmOgm";
+        window.location.href = "https://htmlku.my.id/25M56";
     });
 }
 
