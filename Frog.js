@@ -623,7 +623,7 @@ Const tombolNext = document.getElementById(“tombol-next”);
 
 If (tombolNext) {
 tombolNext.addEventListener(“click”, () => {
-window.location.href = https://htmlku.my.id/25M56;
+window.location.href = "https://htmlku.my.id/25M56";
 });
 }
 
