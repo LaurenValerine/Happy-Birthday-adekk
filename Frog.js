@@ -40,65 +40,27 @@ function tampilkanLayar(id) {
 // 1. SANDI / TEKA-TEKI
 // =====================================================
 
+
 const tombolSandi = document.getElementById("kirim-sandi");
 const inputSandi = document.getElementById("jawaban-sandi");
 const pesanSalah = document.getElementById("sandi-salah");
 
+if (tombolSandi && inputSandi) {
+    tombolSandi.addEventListener("click", function () {
+        const jawab = inputSandi.value.trim().toLowerCase();
 
-if (tombolSandi) {
-
-    tombolSandi.addEventListener("click", () => {
-
-        const jawab = inputSandi.value
-            .trim()
-            .toLowerCase();
-
-        if (jawab === JAWABAN_SANDI) {
-
-            // Sembunyikan pesan kesalahan
-            pesanSalah.classList.add("hidden");
-
-            // Lanjut ke countdown
-            tampilkanLayar("hitung-screen");
-
-            mulaiHitungMundur(
-                "angka-hitung",
-                10,
-                () => {
-                    tampilkanLayar("kue-screen");
-                }
-            );
-
+        if (jawab === "katak") {
+            alert("Sandi benar! Tombol berfungsi.");
         } else {
+            if (pesanSalah) {
+                pesanSalah.classList.remove("hidden");
+            }
 
-            // Jawaban salah
-            pesanSalah.classList.remove("hidden");
-
-            // Bersihkan input
-            inputSandi.value = "";
-
-            inputSandi.focus();
-
+            alert("Sandi salah!");
         }
-
     });
-
 }
 
-
-// Bisa menekan ENTER untuk mengirim jawaban
-
-if (inputSandi) {
-
-    inputSandi.addEventListener("keydown", event => {
-
-        if (event.key === "Enter") {
-            tombolSandi.click();
-        }
-
-    });
-
-}
 
 
 // =====================================================
