@@ -6,7 +6,7 @@
 // KONFIGURASI
 // =====================================================
 
-Const JAWABAN_SANDI = “katak”;
+Const JAWABAN_SANDI = “Katak”;
 Const KLIK_ERROR = 3;
 
 // =====================================================
@@ -20,7 +20,7 @@ Return new Promise(resolve => setTimeout(resolve, ms));
 Function tampilkanLayar(id) {
 
 Document.querySelectorAll(“.screen”).forEach(screen => {  
-    Screen.classList.remove(“active”);  
+    Screen.classList.remove(“active”);                    
     Screen.classList.add(“hidden”);  
 });  
 
@@ -46,7 +46,7 @@ If (tombolSandi) {
 tombolSandi.addEventListener(“click”, () => {  
 
     const jawab = inputSandi.value  
-        .trim()  
+        .trim();  
         .toLowerCase();  
 
     If (jawab === JAWABAN_SANDI) {  
